@@ -1,7 +1,6 @@
 .header {
     background-color: var(--primary-color);
-    color: white;
-    padding: 10px 0;
+    color: rgb(26, 25, 25);
 }
 
 .container {
@@ -16,27 +15,11 @@
     align-items: center;
 }
 
-h3 {
-    margin: 0;
-    flex-grow: 1;
-    text-align: center;
-}
 
 .navbar {
     display: flex;
     gap: 20px; 
 }
 
-.loginButton{
-    padding: 5px;
-    border-radius: 4px;
-    height: 37px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-.buttonIcon img {
-    height: 100%; 
-    width: auto;
-}
+

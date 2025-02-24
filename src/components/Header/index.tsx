@@ -1,16 +1,14 @@
-import React, {useState} from 'react';
-import { Container, Button } from 'react-bootstrap';
-import { CiShoppingCart } from 'react-icons/ci';
-import styles from '../Header/Header.module.scss'; // если у тебя есть стили
+import React, { useState } from "react";
+import { Container, Button } from "react-bootstrap";
+import { LuShoppingCart } from "react-icons/lu";
+import styles from "../Header/Header.module.scss"; // если у тебя есть стили
 
 const Header = () => {
-
   const [isAdmin, setIsAdmin] = useState(false);
 
   const handleLogin = () => {
-
     setIsAdmin(true);
-  }
+  };
 
   return (
     <header className={styles.header}>
@@ -19,18 +17,13 @@ const Header = () => {
           <img src="/logo-icon.svg" alt="Логотип компании" />
         </div>
 
-        <h3>Магазин спортивной одежды</h3>
-
         <div className={styles.navbar}>
-          <div className={styles.cartIcon}>
-            <CiShoppingCart size={35} />
-          </div>
+          <LuShoppingCart size={35} />
+
           {isAdmin ? (
-            <Button variant="primary" className={styles.loginButton}>
-              Личный кабинет
-            </Button>
+            <Button variant="light">Личный кабинет</Button>
           ) : (
-            <Button variant="primary" className={styles.loginButton} onClick={handleLogin}>
+            <Button variant="light" onClick={handleLogin}>
               Войти
             </Button>
           )}
