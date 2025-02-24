@@ -22,9 +22,8 @@ const Header = () => {
         <h3>Магазин спортивной одежды</h3>
 
         <div className={styles.navbar}>
-          <div className={styles.cartIcon}>
             <CiShoppingCart size={35} />
-          </div>
+          
           {isAdmin ? (
             <Button variant="primary" className={styles.loginButton}>
               Личный кабинет
