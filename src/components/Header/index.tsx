@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { LuShoppingCart } from "react-icons/lu";
-import styles from "../Header/Header.module.scss"; // если у тебя есть стили
+import styles from "../Header/Header.module.scss"; 
+import LoginModal from "../ui/ModalAuth"; 
 
 const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleLogin = () => {
-    setIsAdmin(true);
+    setShowModal(true); 
+  };
+
+  const handleClose = () => {
+    setShowModal(false); 
+  };
+
+  const handleLoginSuccess = () => {
+    setIsAdmin(true); 
   };
 
   return (
@@ -29,6 +39,12 @@ const Header = () => {
           )}
         </div>
       </Container>
+
+      <LoginModal
+        show={showModal}
+        handleClose={handleClose}
+        handleLoginSuccess={handleLoginSuccess}
+      />
     </header>
   );
 };
