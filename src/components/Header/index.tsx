@@ -1,24 +1,22 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Container, Button } from "react-bootstrap";
-import { LuShoppingCart } from "react-icons/lu";
+import { LuShoppingCart } from "react-icons/lu";  
 import styles from "../Header/Header.module.scss"; 
-import LoginModal from "../ui/ModalAuth"; 
+import LoginModal from "../ui/ModalAuth";
+import CartOffcanvas from "../ui/CanvasCart"; 
 
 const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showCart, setShowCart] = useState(false); 
+  const [cartCount, setCartCount] = useState(0); 
 
-  const handleLogin = () => {
-    setShowModal(true); 
-  };
+  const handleLogin = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  const handleLoginSuccess = () => setIsAdmin(true);
 
-  const handleClose = () => {
-    setShowModal(false); 
-  };
-
-  const handleLoginSuccess = () => {
-    setIsAdmin(true); 
-  };
+  const handleShowCart = () => setShowCart(true);
+  const handleCloseCart = () => setShowCart(false);
 
   return (
     <header className={styles.header}>
@@ -28,7 +26,12 @@ const Header = () => {
         </div>
 
         <div className={styles.navbar}>
-          <LuShoppingCart size={35} />
+          <div className={styles.cartIconWrapper} onClick={handleShowCart}>
+            <LuShoppingCart size={35} style={{ cursor: "pointer" }} />
+            
+              <div className={styles.cartCount}>{cartCount}</div>
+            
+          </div>
 
           {isAdmin ? (
             <Button variant="light">Личный кабинет</Button>
@@ -42,9 +45,11 @@ const Header = () => {
 
       <LoginModal
         show={showModal}
-        handleClose={handleClose}
+        handleClose={handleCloseModal}
         handleLoginSuccess={handleLoginSuccess}
       />
+
+      <CartOffcanvas show={showCart} handleClose={handleCloseCart} />
     </header>
   );
 };
