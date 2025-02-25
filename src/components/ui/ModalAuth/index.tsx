@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
 const LoginModal = ({ show, handleClose, handleLoginSuccess }) => {
@@ -13,13 +13,11 @@ const LoginModal = ({ show, handleClose, handleLoginSuccess }) => {
   };
 
   const handleSubmit = () => {
-    // Здесь можно добавить логику авторизации
     console.log("Login:", formData.login, "Password:", formData.password);
 
-    // Пример: если логин и пароль корректные, вызвать успешную авторизацию
     if (formData.login === "admin" && formData.password === "password") {
-      handleLoginSuccess(); // Сообщаем родителю об успешной авторизации
-      handleClose(); // Закрыть модальное окно
+      handleLoginSuccess(); 
+      handleClose(); 
     } else {
       alert("Неверный логин или пароль");
     }
