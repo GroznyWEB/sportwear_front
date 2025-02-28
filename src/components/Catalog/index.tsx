@@ -3,6 +3,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from 'react-bootstrap/Button';
 import styles from "./Catalog.module.scss";
+import { Container } from "react-bootstrap";
 
 const products = [
   { id: 1, name: "Product 1", category: "Category 1", price: 7400 },
@@ -43,7 +44,7 @@ const Catalog: React.FC = () => {
 
 
   return (
-    <div className={styles.catalog}>
+    <Container className={styles.container}>
       <h3>Каталог</h3>
 
       <div className={styles.filters}>
@@ -82,11 +83,11 @@ const Catalog: React.FC = () => {
             <h4>{product.name}</h4>
             <p>Категория: {product.category}</p>
             <p>Цена: {product.price} ₽</p>
-            <Button variant="outline-dark">Подробнее</Button>
+            <Button className="w-100" variant="outline-dark">Подробнее</Button>
           </div>
         ))}
       </div>
-    </div>
+    </Container>
   );
 };
 

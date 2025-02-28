@@ -20,7 +20,7 @@ body {
 .container {
     width: 70%;
     margin: auto;  // Центрирование
-    padding: 20px;
+    padding: 10px;
 
     @media (max-width: 1024px) {
         width: 100%; // Устанавливаем ширину 100% для экранов 1024px и меньше

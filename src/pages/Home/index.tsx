@@ -13,9 +13,7 @@ const Home: React.FC = () => {
     return (
         <>
             <Header />
-            <Container className={styles.container}>
-                <Catalog />
-            </Container>
+            <Catalog />
             <Footer />
         </>
     );
