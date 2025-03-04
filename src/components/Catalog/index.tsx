@@ -4,7 +4,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/Button";
 import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
-import FeedbackModal from "../FeedbackModal";
+import FeedbackModal from "../ui/FeedbackModal";
 
 const products = [
   { id: 1, name: "Product 1", category: "Category 1", price: 7400 },

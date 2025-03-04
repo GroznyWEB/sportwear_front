@@ -2,21 +2,34 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import styles from "../FeedbackModal/FeedbackModal.module.scss";
+import { validatePhone } from "../../../utils/phoneMask"; 
 
 const FeedbackModal: React.FC = () => {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
+    
+    if (form.checkValidity() === false || phoneError) {
       event.preventDefault();
       event.stopPropagation();
     }
+    
     setValidated(true);
+  };
+
+  const handlePhoneChange = (value: string) => {
+    const cleanedValue = value.replace(/\D/g, "").slice(0, 11); 
+    setPhone(cleanedValue);
+    
+    const error = validatePhone(cleanedValue); 
+    setPhoneError(error); 
   };
 
   return (
@@ -24,7 +37,7 @@ const FeedbackModal: React.FC = () => {
       <Button
         variant="primary"
         onClick={handleShow}
-        className={styles.feedbackButton} 
+        className={styles.feedbackButton}
       >
         Обратная связь
       </Button>
@@ -56,7 +69,13 @@ const FeedbackModal: React.FC = () => {
                   required
                   type="text"
                   placeholder="Введите номер телефона"
+                  value={phone}
+                  onChange={(e) => handlePhoneChange(e.target.value)} // Используем функцию для обработки
+                  isInvalid={!!phoneError} // Подсвечиваем красным, если ошибка
                 />
+                <Form.Control.Feedback type="invalid">
+                  {phoneError}
+                </Form.Control.Feedback>
                 <Form.Control.Feedback>Все хорошо!</Form.Control.Feedback>
               </Form.Group>
             </Row>
