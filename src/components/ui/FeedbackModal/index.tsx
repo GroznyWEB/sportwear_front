@@ -1,13 +1,12 @@
-// src/components/FeedbackModal.tsx
 import React, { useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import styles from "../FeedbackModal/FeedbackModal.module.scss";
-import { validatePhone } from "../../../utils/phoneMask"; 
+import { handlePhoneChange } from "../../../utils/phoneMask";
 
 const FeedbackModal: React.FC = () => {
   const [show, setShow] = useState(false);
   const [validated, setValidated] = useState(false);
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+7 ");
   const [phoneError, setPhoneError] = useState("");
 
   const handleClose = () => setShow(false);
@@ -22,14 +21,6 @@ const FeedbackModal: React.FC = () => {
     }
     
     setValidated(true);
-  };
-
-  const handlePhoneChange = (value: string) => {
-    const cleanedValue = value.replace(/\D/g, "").slice(0, 11); 
-    setPhone(cleanedValue);
-    
-    const error = validatePhone(cleanedValue); 
-    setPhoneError(error); 
   };
 
   return (
@@ -70,8 +61,8 @@ const FeedbackModal: React.FC = () => {
                   type="text"
                   placeholder="Введите номер телефона"
                   value={phone}
-                  onChange={(e) => handlePhoneChange(e.target.value)} // Используем функцию для обработки
-                  isInvalid={!!phoneError} // Подсвечиваем красным, если ошибка
+                  onChange={(e) => handlePhoneChange(e, setPhone)} 
+                  isInvalid={!!phoneError} 
                 />
                 <Form.Control.Feedback type="invalid">
                   {phoneError}

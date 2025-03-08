@@ -1,10 +1,16 @@
-// src/utils/phoneValidation.ts
 
-export const validatePhone = (value: string): string => {
-    const phoneRegex = /^\d{11}$/; // Только цифры, и длина должна быть ровно 11 символов
-    if (!phoneRegex.test(value.replace(/\D/g, ""))) { // Убираем все нецифровые символы перед проверкой
-      return "Номер телефона должен содержать ровно 11 цифр";
-    }
-    return "";
-  };
+export const handlePhoneChange = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  setPhone: React.Dispatch<React.SetStateAction<string>>
+) => {
+  let value = e.target.value.replace(/\D/g, "");
+  if (value.startsWith("7")) {
+    value = value.slice(1); 
+  }
   
+  value = value.slice(0, 10); 
+
+  const formattedPhone = `+7 (${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 8)}-${value.slice(8, 10)}`;
+  
+  setPhone(formattedPhone); 
+};
