@@ -22,7 +22,7 @@ const Header = () => {
     <header className={styles.header}>
       <Container className={styles.container}>
         <div className={styles.logo}>
-          <img src="/logo-icon.svg" alt="Логотип компании" />
+          <img src="/logo-icon-red.png" alt="Логотип компании" />
         </div>
 
         <div className={styles.navbar}>

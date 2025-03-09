@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import Button from 'react-bootstrap/Button';
+import Button from "react-bootstrap/Button";
 import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
+import FeedbackModal from "../ui/FeedbackModal";
 
 const products = [
   { id: 1, name: "Product 1", category: "Category 1", price: 7400 },
@@ -24,7 +25,7 @@ const sortOptions = [
 
 const Catalog: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [sortOption, setSortOption] = useState<string>("asc"); 
+  const [sortOption, setSortOption] = useState<string>("asc");
 
   const filteredProducts = products
     .filter(
@@ -39,9 +40,8 @@ const Catalog: React.FC = () => {
   };
 
   const handleSortSelect = (option: string | null) => {
-    setSortOption(option ?? "asc");  
+    setSortOption(option ?? "asc");
   };
-
 
   return (
     <Container className={styles.container}>
@@ -83,9 +83,14 @@ const Catalog: React.FC = () => {
             <h4>{product.name}</h4>
             <p>Категория: {product.category}</p>
             <p>Цена: {product.price} ₽</p>
-            <Button className="w-100" variant="outline-dark">Подробнее</Button>
+            <Button className="w-100" variant="outline-dark">
+              Подробнее
+            </Button>
           </div>
         ))}
+      </div>
+      <div className={styles.feedBack}>
+        <FeedbackModal />
       </div>
     </Container>
   );

@@ -1,9 +1,6 @@
-.container {
-    background-color: white;
-    margin-bottom: 20px!important;
-}
 
-.catalog {
+
+.container {
     padding: 20px;
 
     h3 {
@@ -69,4 +66,9 @@
             grid-template-columns: 1fr;
         }
     }
+}
+
+.feedBack {
+    padding-top: 20px;
+    padding-bottom: 10px;
 }

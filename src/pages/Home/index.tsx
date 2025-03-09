@@ -6,6 +6,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Catalog from '../../components/Catalog';
 import styles from './Home.module.scss'
+// import FeedbackModal from '../../components/FeedbackModal';
 
 const Home: React.FC = () => {
     // const products = useSelector((state: RootState) => state.products);
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
         <>
             <Header />
             <Catalog />
+            {/* <FeedbackModal/> */}
             <Footer />
         </>
     );
