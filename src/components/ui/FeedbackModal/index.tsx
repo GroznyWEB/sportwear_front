@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
-import styles from "../FeedbackModal/FeedbackModal.module.scss";
 import { handlePhoneChange } from "../../../utils/phoneMask";
 
 const FeedbackModal: React.FC = () => {
@@ -28,7 +27,6 @@ const FeedbackModal: React.FC = () => {
       <Button
         variant="primary"
         onClick={handleShow}
-        className={styles.feedbackButton}
       >
         Обратная связь
       </Button>
