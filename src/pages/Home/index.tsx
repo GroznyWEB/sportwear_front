@@ -15,7 +15,6 @@ const Home: React.FC = () => {
         <>
             <Header />
             <Catalog />
-            {/* <FeedbackModal/> */}
             <Footer />
         </>
     );

@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
 import FeedbackModal from "../ui/FeedbackModal";
+import { Link } from "react-router-dom";
 
 const products = [
   { id: 1, name: "Product 1", category: "Category 1", price: 7400 },
@@ -83,9 +84,11 @@ const Catalog: React.FC = () => {
             <h4>{product.name}</h4>
             <p>Категория: {product.category}</p>
             <p>Цена: {product.price} ₽</p>
-            <Button className="w-100" variant="outline-dark">
-              Подробнее
-            </Button>
+            <Link to={`/product/${product.id}`}>
+              <Button className="w-100" variant="outline-dark">
+                Подробнее
+              </Button>
+            </Link>
           </div>
         ))}
       </div>
