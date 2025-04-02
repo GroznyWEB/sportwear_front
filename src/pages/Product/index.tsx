@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Product.module.scss";
-import Header from "../../components/Header";
+import { Container } from "react-bootstrap";
 
 const products = [
   { id: 1, name: "Product 1", category: "Category 1", price: 7400 },
@@ -20,12 +20,14 @@ const ProductSlider = ({ galleryImages }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const prevSlide = () => {
-    const index = currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1;
+    const index =
+      currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1;
     setCurrentIndex(index);
   };
 
   const nextSlide = () => {
-    const index = currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1;
+    const index =
+      currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1;
     setCurrentIndex(index);
   };
 
@@ -68,20 +70,26 @@ const ProductSlider = ({ galleryImages }) => {
         </button>
       </div>
 
-      <div className={styles.indicators}>
-        {galleryImages.map((_, index) => (
-          <span
-            key={index}
-            className={`${styles.indicator} ${currentIndex === index ? styles.activeIndicator : ""}`}
-            onClick={() => setSlide(index)}
-          />
-        ))}
-      </div>
-
       {isModalOpen && (
         <div className={styles.modal} onClick={closeModal}>
-          <span className={styles.closeModal} onClick={closeModal}>&times;</span>
-          <img className={styles.modalImage} src={galleryImages[currentIndex]} alt="Увеличенное изображение" />
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <span className={styles.closeModal} onClick={closeModal}>
+              &times;
+            </span>
+            <div className={styles.modalImageWrapper}>
+              <button className={styles.modalPrevBtn} onClick={prevSlide}>
+                &#10094;
+              </button>
+              <img
+                className={styles.modalImage}
+                src={galleryImages[currentIndex]}
+                alt="Увеличенное изображение"
+              />
+              <button className={styles.modalNextBtn} onClick={nextSlide}>
+                &#10095;
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -98,109 +106,121 @@ const Product: React.FC = () => {
     return <div>Продукт не найден</div>;
   }
 
+
+  
   return (
-    <div>
-      <Header />
-      <div className={styles.page}>
-        <h1 className={styles.name}>{product.name}</h1>
+    <Container>
+      <h1 className={styles.name}>{product.name}</h1>
 
-        <div className={styles.content}>
-          <div className={styles.image}>
-            <ProductSlider galleryImages={galleryImages} />
-          </div>
-
-          <div className={styles.details}>
-            <p>Категория: {product.category}</p>
-            <p className={styles.price}>Цена: {product.price} ₽</p>
-
-            <div className={styles.size}>
-              <p>Выберите размер</p>
-              <div className={styles.sizes}>
-                <button className={styles.sizeBtn}>A0</button>
-                <button className={styles.sizeBtn}>A1</button>
-                <button className={styles.sizeBtn}>A2</button>
-                <button className={styles.sizeBtn}>A2L</button>
-                <button className={styles.sizeBtn}>A3</button>
-                <button className={styles.sizeBtn}>A3L</button>
-                <button className={styles.sizeBtn}>A4</button>
-                <button className={styles.sizeBtn}>A5</button>
-              </div>
-            </div>
-
-            <div className={styles.quantity}>
-              <label htmlFor="quantity">Количество:</label>
-              <input type="number" id="quantity" defaultValue="1" min="1" />
-            </div>
-
-            <button className={styles.addToCartBtn}>В КОРЗИНУ</button>
-          </div>
+      <div className={styles.content}>
+        <div className={styles.image}>
+          <ProductSlider galleryImages={galleryImages} />
         </div>
 
-        <div className={styles.productDescription}>
-          <h2>Описание</h2>
-          <p>Кимоно(ги) для БЖЖ (бразильское джиу-джитсу)...</p>
-          <ul className={styles.features}>
-            <li>Куртка и штаны выполнены из хлопка...</li>
-            <li>Поставляется ги в сумке...</li>
-          </ul>
-        </div>
+        <div className={styles.details}>
+          <p>Категория: {product.category}</p>
+          <p className={styles.price}>Цена: {product.price} ₽</p>
 
-        <div className={styles.sizeTable}>
-          <h3>Условная таблица размеров ги для БЖЖ от Submission:</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Размер</th>
-                <th>Рост атлета (см)</th>
-                <th>Вес атлета (кг)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>A0</td>
-                <td>152 - 165</td>
-                <td>45.4 - 63.5</td>
-              </tr>
-              <tr>
-                <td>A1</td>
-                <td>157 - 168</td>
-                <td>49.9 - 68</td>
-              </tr>
-              <tr>
-                <td>A2</td>
-                <td>173 - 183</td>
-                <td>74.8 - 94</td>
-              </tr>
-              <tr>
-                <td>A2L</td>
-                <td>180 - 191</td>
-                <td>74.8 - 99.8</td>
-              </tr>
-              <tr>
-                <td>A3</td>
-                <td>180 - 191</td>
-                <td>81.6 - 104</td>
-              </tr>
-              <tr>
-                <td>A3L</td>
-                <td>188 - 196</td>
-                <td>81.6 - 109</td>
-              </tr>
-              <tr>
-                <td>A4</td>
-                <td>188 - 196</td>
-                <td>90.7 - 118</td>
-              </tr>
-              <tr>
-                <td>A5</td>
-                <td>196 - 203</td>
-                <td>90.7 - 122</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className={styles.size}>
+  <p>Выберите размер</p>
+  <div className={styles.sizes}>
+    <div className={styles.sizeItem}>
+      <button className={styles.sizeBtn}>A0</button>
+      <span className={styles.sizeQuantity}>2</span>
+    </div>
+    <div className={styles.sizeItem}>
+      <button className={styles.sizeBtn}>A1</button>
+      <span className={styles.sizeQuantity}>8</span>
+    </div>
+    <div className={styles.sizeItem}>
+      <button className={styles.sizeBtn}>A2</button>
+      <span className={styles.sizeQuantity}>32</span>
+    </div>
+    <div className={styles.sizeItem}>
+      <button className={styles.sizeBtn}>A3</button>
+      <span className={styles.sizeQuantity}>17</span>
+    </div>
+    <div className={styles.sizeItem}>
+      <button className={styles.sizeBtn}>A4</button>
+      <span className={styles.sizeQuantity}>4</span>
+    </div>
+  </div>
+</div>
+
+
+          <div className={styles.quantity}>
+            <label htmlFor="quantity">Количество:</label>
+            <input type="number" id="quantity" defaultValue="1" min="1" />
+          </div>
+
+          <button className={styles.addToCartBtn}>В КОРЗИНУ</button>
         </div>
       </div>
-    </div>
+
+      <div className={styles.productDescription}>
+        <h2>Описание</h2>
+        <p>Кимоно(ги) для БЖЖ (бразильское джиу-джитсу)...</p>
+        <ul className={styles.features}>
+          <li>Куртка и штаны выполнены из хлопка...</li>
+          <li>Поставляется ги в сумке...</li>
+        </ul>
+      </div>
+
+      <div className={styles.sizeTable}>
+        <h3>Условная таблица размеров ги для БЖЖ от Submission:</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Размер</th>
+              <th>Рост атлета (см)</th>
+              <th>Вес атлета (кг)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A0</td>
+              <td>152 - 165</td>
+              <td>45.4 - 63.5</td>
+            </tr>
+            <tr>
+              <td>A1</td>
+              <td>157 - 168</td>
+              <td>49.9 - 68</td>
+            </tr>
+            <tr>
+              <td>A2</td>
+              <td>173 - 183</td>
+              <td>74.8 - 94</td>
+            </tr>
+            <tr>
+              <td>A2L</td>
+              <td>180 - 191</td>
+              <td>74.8 - 99.8</td>
+            </tr>
+            <tr>
+              <td>A3</td>
+              <td>180 - 191</td>
+              <td>81.6 - 104</td>
+            </tr>
+            <tr>
+              <td>A3L</td>
+              <td>188 - 196</td>
+              <td>81.6 - 109</td>
+            </tr>
+            <tr>
+              <td>A4</td>
+              <td>188 - 196</td>
+              <td>90.7 - 118</td>
+            </tr>
+            <tr>
+              <td>A5</td>
+              <td>196 - 203</td>
+              <td>90.7 - 122</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Container>
   );
 };
 

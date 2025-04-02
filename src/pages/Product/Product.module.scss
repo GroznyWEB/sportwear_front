@@ -1,15 +1,11 @@
-// Общее оформление страницы
-.page {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px;
-    box-sizing: border-box;
-  }
+
   
   .name {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
+    padding-top: 140px;
+
   }
   
   .content {
@@ -51,6 +47,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: white;
+    height: 400px;
   }
   
   .price {
@@ -109,7 +106,7 @@
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    margin-top: 165px;
+    margin-top: 56px;
   }
   
   // Описание продукта
@@ -191,6 +188,7 @@
   
   .sizeTable tbody tr:hover {
     background-color: #e0e0e0;
+    padding-bottom: 40px;
   }
   
   // Слайдер изображений
@@ -255,6 +253,15 @@
     border: none;
     cursor: pointer;
   }
+  .modalPrevBtn, .modalNextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
   
   .prevBtn {
     left: -30px;
@@ -264,6 +271,15 @@
     right: -30px;
   }
   
+  .modalPrevBtn {
+     left: 50px;
+  }
+
+  .modalNextBtn  {
+     right: 50px;
+  }
+
+
   .indicators {
     display: flex;
     justify-content: center;
@@ -335,5 +351,29 @@
     .prevBtn, .nextBtn {
       display: none;
     }
+  }
+  
+  .sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .sizeItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sizeBtn {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .sizeQuantity {
+    margin-left: 10px;
+    font-size: 16px;
+    color: #555;
   }
   

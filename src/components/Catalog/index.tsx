@@ -46,7 +46,6 @@ const Catalog: React.FC = () => {
 
   return (
     <Container className={styles.container}>
-      <h3>Каталог</h3>
 
       <div className={styles.filters}>
         <DropdownButton
