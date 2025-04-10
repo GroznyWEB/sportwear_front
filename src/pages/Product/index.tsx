@@ -72,7 +72,10 @@ const ProductSlider = ({ galleryImages }) => {
 
       {isModalOpen && (
         <div className={styles.modal} onClick={closeModal}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
             <span className={styles.closeModal} onClick={closeModal}>
               &times;
             </span>
@@ -100,14 +103,12 @@ const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const product = products.find((product) => product.id === Number(id));
 
-  const galleryImages = ["/gi-bjj.jpeg", "/black-gi1.jpeg", "/gi-bjj.jpeg"];
+  const galleryImages = ["/adam-gi.jpeg", "/adam-gi-2.jpeg", "/adam-gi-3.jpeg"];
 
   if (!product) {
     return <div>Продукт не найден</div>;
   }
 
-
-  
   return (
     <Container>
       <h1 className={styles.name}>{product.name}</h1>
@@ -122,38 +123,53 @@ const Product: React.FC = () => {
           <p className={styles.price}>Цена: {product.price} ₽</p>
 
           <div className={styles.size}>
-  <p>Выберите размер</p>
-  <div className={styles.sizes}>
-    <div className={styles.sizeItem}>
-      <button className={styles.sizeBtn}>A0</button>
-      <span className={styles.sizeQuantity}>2</span>
-    </div>
-    <div className={styles.sizeItem}>
-      <button className={styles.sizeBtn}>A1</button>
-      <span className={styles.sizeQuantity}>8</span>
-    </div>
-    <div className={styles.sizeItem}>
-      <button className={styles.sizeBtn}>A2</button>
-      <span className={styles.sizeQuantity}>32</span>
-    </div>
-    <div className={styles.sizeItem}>
-      <button className={styles.sizeBtn}>A3</button>
-      <span className={styles.sizeQuantity}>17</span>
-    </div>
-    <div className={styles.sizeItem}>
-      <button className={styles.sizeBtn}>A4</button>
-      <span className={styles.sizeQuantity}>4</span>
-    </div>
-  </div>
-</div>
-
+            <p>Выберите размер</p>
+            <div className={styles.sizes}>
+            <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A00</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A0</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A1</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A1L</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A2</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A2L</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A2H</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A3</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A3L</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A3H</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A4</button>
+              </div>
+              <div className={styles.sizeItem}>
+                <button className={styles.sizeBtn}>A5</button>
+              </div>
+            </div>
+          </div>
 
           <div className={styles.quantity}>
             <label htmlFor="quantity">Количество:</label>
             <input type="number" id="quantity" defaultValue="1" min="1" />
           </div>
 
-          <button className={styles.addToCartBtn}>В КОРЗИНУ</button>
+          <button className={styles.addToCartBtn}>ДОБАВИТЬ В КОРЗИНУ</button>
         </div>
       </div>
 

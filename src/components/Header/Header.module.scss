@@ -4,23 +4,34 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: white;
+  background-color: #8e9197;
   z-index: 1000;
   padding: 10px 0;
-  opacity: 0.8; /* прозрачность 80% */
+  opacity: 0.9; /* прозрачность 80% */
   transition: all 0.3s ease-in-out;
   border-bottom: 1px solid #ddd;
 }
+
+
+
 
 .header.shrink {
   padding: 5px 0;
 }
 
-.catalog {
-  font-size: 18px;
-  font-weight: 400;
-  cursor: pointer;
+.leftNavbar {
+  display: flex
+  ;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      align-content: center;
+      width: 300px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
 }
+
 
 .container {
   display: flex;
@@ -47,10 +58,13 @@
   width: 100px; /* Уменьшаем логотип при прокрутке */
 }
 
-.navbar {
+.rightNavbar {
   display: flex;
   align-items: center;
   gap: 20px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 
@@ -81,5 +95,7 @@
     width:170px;
     height: 130px;
   }
+  
+ 
   
   

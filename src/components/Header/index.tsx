@@ -29,13 +29,20 @@ const Header = () => {
   return (
     <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
       <Container className={styles.container}>
-        <div className={styles.catalog}>Каталог</div>
+        <div className={styles.leftNavbar}>
+          <div>Каталог</div>
+          <div>Покупателям</div>
+          <div>Контакты</div>
+        </div>
+
         <div className={styles.logo}>
-          <Link href="/">
+          <Link to="/">
             <img src="/logo-icon-red.png" alt="Логотип компании" />
           </Link>
         </div>
-        <div className={styles.navbar}>
+        <div className={styles.rightNavbar}>
+          <div className={styles.media}>WhatsApp</div>
+          <div>Поиск</div>
           <div
             className={styles.cartIconWrapper}
             onClick={() => setShowCart(true)}

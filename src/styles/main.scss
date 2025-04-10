@@ -10,15 +10,15 @@
 }
 
 body {
-    font-family: $font-family;
+    font-family: 'Roboto', Arial, sans-serif;
     font-size: $font-size-base;
     margin: 0;
     padding: 0;
-    background-color: #DFE6F0; // задний фон
+    background-color: #333436; // задний фон
 }
 
 .container {
-    width: 70%;
+    width: 100%;
     margin: auto;  // Центрирование
     padding: 10px;
 
