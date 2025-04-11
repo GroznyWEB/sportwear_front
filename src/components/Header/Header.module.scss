@@ -1,35 +1,30 @@
-
 .header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #8e9197;
   z-index: 1000;
   padding: 10px 0;
-  opacity: 0.9; /* прозрачность 80% */
+  opacity: 0.9;
+  /* прозрачность 80% */
   transition: all 0.3s ease-in-out;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--color);
 }
-
-
-
 
 .header.shrink {
   padding: 5px 0;
 }
 
 .leftNavbar {
-  display: flex
-  ;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      align-items: center;
-      align-content: center;
-      width: 300px;
-      font-size: 14px;
-      font-weight: 800;
-      cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  width: 300px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 
@@ -40,7 +35,7 @@
   position: relative;
   height: 100px;
   transition: height 0.3s ease-in-out;
-  
+
 }
 
 .header.shrink .container {
@@ -55,7 +50,8 @@
 }
 
 .header.shrink .logo img {
-  width: 100px; /* Уменьшаем логотип при прокрутке */
+  width: 150px;
+  /* Уменьшаем логотип при прокрутке */
 }
 
 .rightNavbar {
@@ -67,35 +63,28 @@
   cursor: pointer;
 }
 
-
-
 .cartIconWrapper {
   position: relative;
-  
+
 }
 
-  
-  .cartCount {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background-color: red;
-    color: white;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  div img {
-    width:170px;
-    height: 130px;
-  }
-  
- 
-  
-  
+.cartCount {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+div img {
+  width: 170px;
+  height: 130px;
+}

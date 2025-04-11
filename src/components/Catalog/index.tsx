@@ -8,14 +8,14 @@ import FeedbackModal from "../ui/FeedbackModal";
 import { Link } from "react-router-dom";
 
 const products = [
-  { id: 1, name: "Product 1", category: "Category 1", price: 7400 },
-  { id: 2, name: "Product 2", category: "Category 2", price: 10050 },
-  { id: 3, name: "Product 3", category: "Category 3", price: 3000 },
-  { id: 4, name: "Product 4", category: "Category 4", price: 11000 },
-  { id: 5, name: "Product 5", category: "Category 3", price: 9500 },
-  { id: 6, name: "Product 6", category: "Category 2", price: 7500 },
-  { id: 7, name: "Product 7", category: "Category 1", price: 6500 },
-  { id: 8, name: "Product 8", category: "Category 2", price: 7700 },
+  { id: 1, name: "Griffon white — Shoyoroll", category: "Category 1", price: 7400 },
+  { id: 2, name: "Griffon white — Shoyoroll 2", category: "Category 2", price: 10050 },
+  { id: 3, name: "Griffon white — Shoyoroll 3", category: "Category 3", price: 3000 },
+  { id: 4, name: "Griffon white — Shoyoroll 4", category: "Category 4", price: 11000 },
+  { id: 5, name: "Griffon white — Shoyoroll 5", category: "Category 3", price: 9500 },
+  { id: 6, name: "Griffon white — Shoyoroll 6", category: "Category 2", price: 7500 },
+  { id: 7, name: "Griffon white — Shoyoroll 7", category: "Category 1", price: 6500 },
+  { id: 8, name: "Griffon white — Shoyoroll 8", category: "Category 2", price: 7700 },
 ];
 
 const categories = ["Category 1", "Category 2", "Category 3", "Category 4"];
@@ -53,6 +53,7 @@ const Catalog: React.FC = () => {
       <div className={styles.filters}>
         <DropdownButton
           id="dropdown-category"
+          variant="outline"
           title={selectedCategory ? selectedCategory : "Все категории"}
           onSelect={handleCategorySelect}
         >
@@ -65,6 +66,7 @@ const Catalog: React.FC = () => {
         </DropdownButton>
 
         <DropdownButton
+          variant="outline"
           id="dropdown-sort"
           title={
             sortOption === "asc" ? "По возрастанию цены" : "По убыванию цены"
@@ -81,17 +83,16 @@ const Catalog: React.FC = () => {
 
       <div className={styles.productGrid}>
         {filteredProducts.map((product) => (
-          <div key={product.id} className={styles.productCard}>
-            <img src="/adam-gi.jpeg" alt="фото продукта" />
-            <h4>{product.name}</h4>
-            <p>Категория: {product.category}</p>
-            <p>Цена: {product.price} ₽</p>
-            <Link to={`/product/${product.id}`}>
-              <Button className="w-100" variant="outline-dark">
+          <Link to={`/product/${product.id}`}>
+            <div key={product.id} className={styles.productCard}>
+              <img src="/adam-gi.jpeg" alt="фото продукта" />
+              <h4>{product.name}</h4>
+              <p className={styles.price}>{product.price} ₽</p>
+              {/* <Button className="w-100" variant="outline-light">
                 Подробнее
-              </Button>
-            </Link>
-          </div>
+              </Button> */}
+            </div>
+          </Link>
         ))}
       </div>
       <div className={styles.feedBack}>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Row, Col } from "react-bootstrap";
 import { handlePhoneChange } from "../../../utils/phoneMask";
+import styles from './FeedbackModal.module.scss'
 
 const FeedbackModal: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -13,19 +14,20 @@ const FeedbackModal: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const form = event.currentTarget;
-    
+
     if (form.checkValidity() === false || phoneError) {
       event.preventDefault();
       event.stopPropagation();
     }
-    
+
     setValidated(true);
   };
 
   return (
     <>
       <Button
-        variant="primary"
+        className={styles.btn}
+        variant="outline-light"
         onClick={handleShow}
       >
         Обратная связь
@@ -59,8 +61,8 @@ const FeedbackModal: React.FC = () => {
                   type="text"
                   placeholder="Введите номер телефона"
                   value={phone}
-                  onChange={(e) => handlePhoneChange(e, setPhone)} 
-                  isInvalid={!!phoneError} 
+                  onChange={(e) => handlePhoneChange(e, setPhone)}
+                  isInvalid={!!phoneError}
                 />
                 <Form.Control.Feedback type="invalid">
                   {phoneError}
