@@ -46,7 +46,9 @@ const Catalog: React.FC = () => {
 
   return (
     <Container className={styles.container}>
-      <h3>Каталог</h3>
+      <div className={styles.catalog}>
+        <h1>Каталог</h1>
+      </div>
 
       <div className={styles.filters}>
         <DropdownButton
@@ -80,7 +82,7 @@ const Catalog: React.FC = () => {
       <div className={styles.productGrid}>
         {filteredProducts.map((product) => (
           <div key={product.id} className={styles.productCard}>
-            <img src="/gi-bjj.jpeg" alt="фото продукта" />
+            <img src="/adam-gi.jpeg" alt="фото продукта" />
             <h4>{product.name}</h4>
             <p>Категория: {product.category}</p>
             <p>Цена: {product.price} ₽</p>

@@ -2,15 +2,16 @@
 
 .container {
     padding: 20px;
+    
 
-    h3 {
-        margin-bottom: 20px;
-    }
+    
 
     .filters {
         display: flex;
         justify-content: space-between;
         margin-bottom: 20px;
+        padding-top: 70px;
+
 
         label {
             display: flex;
@@ -25,21 +26,22 @@
 
     .productGrid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 20px;
-    }
+        grid-template-columns: repeat(3, minmax(250px, 1fr));
+        gap: 5px;
+      }
+      
 
     .productCard {
-        padding: 15px;
+        
         border: 1px solid #ddd;
         border-radius: 8px;
         text-align: center;
-        background-color: #f9f9f9;
+        background-color: #8e9197;
 
         img {
             width: 100%;
             height: auto;
-            max-width: 150px; /* ограничение по ширине */
+            
             margin-bottom: 10px;
             border-radius: 8px;
             object-fit: cover;
@@ -71,4 +73,13 @@
 .feedBack {
     padding-top: 20px;
     padding-bottom: 10px;
+}
+
+.catalog {
+    color: white;
+    padding-top: 130px;
+    align-items:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

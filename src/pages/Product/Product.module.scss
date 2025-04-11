@@ -1,15 +1,11 @@
-// Общее оформление страницы
-.page {
-    padding: 20px;
-    margin: 0 auto;
-    max-width: 1200px;
-    box-sizing: border-box;
-  }
+
   
   .name {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
+    padding-top: 140px;
+
   }
   
   .content {
@@ -51,12 +47,14 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     background-color: white;
+    height: 400px;
   }
   
   .price {
-    color: #d94040;
-    font-size: 32px;
-    font-weight: bold;
+    color: rgb(18, 17, 17);
+    font-size: 18px;
+    font-weight: 200;
+    font-family: Roboto;
     margin-bottom: 10px;
   }
   
@@ -69,18 +67,7 @@
     display: flex;
     flex-wrap: wrap;
   }
-  
-  .sizeBtn {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    padding: 10px 15px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
+   
   // Количество товара
   .quantity {
     display: flex;
@@ -101,16 +88,26 @@
   
   // Кнопка добавления в корзину
   .addToCartBtn {
-    background-color: #d94040;
-    color: white;
+    background-color: #f8f8f8;
+    color: rgb(18, 17, 17);
     font-size: 18px;
-    font-weight: bold;
+    font-family: Roboto;
+    font-weight: 600;
     padding: 15px 30px;
     border-radius: 8px;
-    border: none;
+    border: 1px solid #101010;
     cursor: pointer;
-    margin-top: 165px;
+    margin-top: 56px;
+    transition: all 0.3s ease; // плавный переход
+    width: 317px;
+    text-transform: uppercase;
   }
+  
+  .addToCartBtn:hover {
+    color: #d94040;           // красный текст
+    border-color: #d94040;    // красный бордер
+  }
+  
   
   // Описание продукта
   .productDescription {
@@ -191,6 +188,7 @@
   
   .sizeTable tbody tr:hover {
     background-color: #e0e0e0;
+    padding-bottom: 40px;
   }
   
   // Слайдер изображений
@@ -255,6 +253,15 @@
     border: none;
     cursor: pointer;
   }
+  .modalPrevBtn, .modalNextBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background-color: transparent;
+    border: none;
+    color: white;
+  }
   
   .prevBtn {
     left: -30px;
@@ -264,6 +271,15 @@
     right: -30px;
   }
   
+  .modalPrevBtn {
+     left: 50px;
+  }
+
+  .modalNextBtn  {
+     right: 50px;
+  }
+
+
   .indicators {
     display: flex;
     justify-content: center;
@@ -336,4 +352,21 @@
       display: none;
     }
   }
+  
+  .sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  
+  .sizeItem {
+    display: flex;
+    align-items: center;
+    border: 1px;    
+    border-radius: 1px; 
+  }
+  
+ 
+  
   

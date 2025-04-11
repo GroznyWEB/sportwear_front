@@ -1,42 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
-import { LuShoppingCart } from "react-icons/lu";  
-import styles from "../Header/Header.module.scss"; 
+import { PiShoppingCartSimpleThin } from "react-icons/pi";
+import styles from "../Header/Header.module.scss";
 import LoginModal from "../ui/ModalAuth";
-import CartOffcanvas from "../ui/CanvasCart"; 
+import CartOffcanvas from "../ui/CanvasCart";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [showCart, setShowCart] = useState(false); 
-  const [cartCount, setCartCount] = useState(0); 
+  const [showCart, setShowCart] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
+  const [shrink, setShrink] = useState(false);
 
-  const handleLogin = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
-  const handleLoginSuccess = () => setIsAdmin(true);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setShrink(true);
+      } else {
+        setShrink(false);
+      }
+    };
 
-  const handleShowCart = () => setShowCart(true);
-  const handleCloseCart = () => setShowCart(false);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
       <Container className={styles.container}>
-        <div className={styles.logo}>
-          <img src="/logo-icon-red.png" alt="Логотип компании" />
+        <div className={styles.leftNavbar}>
+          <div>Каталог</div>
+          <div>Покупателям</div>
+          <div>Контакты</div>
         </div>
 
-        <div className={styles.navbar}>
-          <div className={styles.cartIconWrapper} onClick={handleShowCart}>
-            <LuShoppingCart size={35} style={{ cursor: "pointer" }} />
-            
-              <div className={styles.cartCount}>{cartCount}</div>
-            
+        <div className={styles.logo}>
+          <Link to="/">
+            <img src="/logo-icon-red.png" alt="Логотип компании" />
+          </Link>
+        </div>
+        <div className={styles.rightNavbar}>
+          <div className={styles.media}>WhatsApp</div>
+          <div>Поиск</div>
+          <div
+            className={styles.cartIconWrapper}
+            onClick={() => setShowCart(true)}
+          >
+            <PiShoppingCartSimpleThin size={35} style={{ cursor: "pointer" }} />
+            <div className={styles.cartCount}>{cartCount}</div>
           </div>
-
           {isAdmin ? (
             <Button variant="light">Личный кабинет</Button>
           ) : (
-            <Button variant="light" onClick={handleLogin}>
+            <Button variant="light" onClick={() => setShowModal(true)}>
               Войти
             </Button>
           )}
@@ -45,11 +62,10 @@ const Header = () => {
 
       <LoginModal
         show={showModal}
-        handleClose={handleCloseModal}
-        handleLoginSuccess={handleLoginSuccess}
+        handleClose={() => setShowModal(false)}
+        handleLoginSuccess={() => setIsAdmin(true)}
       />
-
-      <CartOffcanvas show={showCart} handleClose={handleCloseCart} />
+      <CartOffcanvas show={showCart} handleClose={() => setShowCart(false)} />
     </header>
   );
 };
