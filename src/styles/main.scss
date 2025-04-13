@@ -2,29 +2,31 @@
 // а также определять глобальные стили для вашего приложения.
 
 @use './_variables' as *; // Импортируем все переменные
-@use './_mixins' as *;     // Импортируем все миксины
+@use './_mixins' as *; // Импортируем все миксины
 
 :root {
     --primary-color: #007bff;
-    --black-color: #333
+    --black-color: #333;
+    --color: #737373
 }
 
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: 'Akrobat', Arial, sans-serif;
     font-size: $font-size-base;
     margin: 0;
     padding: 0;
-    background-color: #333436; // задний фон
+    color: var(--color);
+    background-color: #141418; // задний фон
 }
 
 .container {
-    width: 100%;
-    margin: auto;  // Центрирование
-    padding: 10px;
+    max-width: 100%;
+    margin: auto; // Центрирование
+    padding: 20px;
 
     @media (max-width: 1024px) {
         width: 100%; // Устанавливаем ширину 100% для экранов 1024px и меньше
-    }    
+    }
 }
 
 .button {

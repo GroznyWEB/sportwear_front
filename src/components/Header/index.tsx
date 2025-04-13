@@ -37,7 +37,7 @@ const Header = () => {
 
         <div className={styles.logo}>
           <Link to="/">
-            <img src="/logo-icon-red.png" alt="Логотип компании" />
+            <img src="/logo-icon-gray.png" alt="Логотип компании" />
           </Link>
         </div>
         <div className={styles.rightNavbar}>
@@ -47,15 +47,17 @@ const Header = () => {
             className={styles.cartIconWrapper}
             onClick={() => setShowCart(true)}
           >
-            <PiShoppingCartSimpleThin size={35} style={{ cursor: "pointer" }} />
-            <div className={styles.cartCount}>{cartCount}</div>
+            {/* <PiShoppingCartSimpleThin size={35} style={{ cursor: "pointer" }} /> */}
+            
+            Корзина
+            {/* <div className={styles.cartCount}>{cartCount}</div> */}
           </div>
           {isAdmin ? (
             <Button variant="light">Личный кабинет</Button>
           ) : (
-            <Button variant="light" onClick={() => setShowModal(true)}>
+            <div  onClick={() => setShowModal(true)}>
               Войти
-            </Button>
+            </div>
           )}
         </div>
       </Container>

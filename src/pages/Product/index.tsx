@@ -125,7 +125,7 @@ const Product: React.FC = () => {
           <div className={styles.size}>
             <p>Выберите размер</p>
             <div className={styles.sizes}>
-            <div className={styles.sizeItem}>
+              <div className={styles.sizeItem}>
                 <button className={styles.sizeBtn}>A00</button>
               </div>
               <div className={styles.sizeItem}>

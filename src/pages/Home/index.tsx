@@ -7,9 +7,8 @@ const Home: React.FC = () => {
 
     return (
         <>
-           
             <Catalog />
-            <Footer/>
+            <Footer />
         </>
     );
 };
