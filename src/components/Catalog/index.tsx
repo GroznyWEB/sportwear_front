@@ -98,6 +98,40 @@ const Catalog: React.FC = () => {
       <div className={styles.feedBack}>
         <FeedbackModal />
       </div>
+      <div className={styles.artBoard}>
+        <div>
+          <img
+            src="/delivery-box.png"
+            alt="Доставка"
+            className={styles.invertIcon}
+          />
+          <span>Бесплатная доставка по всей России</span>
+        </div>
+        <div>
+          <img
+            src="/certificate.png"
+            alt="Сертификат"
+            className={styles.invertIcon}
+          />
+          <span>Бренд запатентован</span>
+        </div>
+        <div>
+          <img src="/guarantee.png" alt="Гарантия" />
+          <span>Гарантия 6 месяцев</span>
+        </div>
+        <div>
+          <img
+            src="/shopping-bag.png"
+            alt="Оплата"
+            className={styles.invertIcon}
+          />
+          <span>Онлайн оплата на нашем сайте</span>
+        </div>
+        <div>
+          <img src="/competition.png" alt="ACA" />
+          <span>Бойцы ACA доверяют нам</span>
+        </div>
+      </div>
     </Container>
   );
 };
