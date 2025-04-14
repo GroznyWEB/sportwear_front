@@ -88,3 +88,13 @@ div img {
   width: 170px;
   height: 130px;
 }
+
+.media {
+  color: inherit;           // Наследует цвет от родителя (или задай #000)
+  text-decoration: none;    // Убирает подчеркивание
+
+  &:hover {
+    color: #333;            // Цвет при наведении
+    text-decoration: underline; // Можешь оставить или убрать
+  }
+}
