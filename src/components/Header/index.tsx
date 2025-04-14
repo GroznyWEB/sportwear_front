@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
-import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import styles from "../Header/Header.module.scss";
 import LoginModal from "../ui/ModalAuth";
 import CartOffcanvas from "../ui/CanvasCart";
@@ -31,8 +30,10 @@ const Header = () => {
       <Container className={styles.container}>
         <div className={styles.leftNavbar}>
           <div>Каталог</div>
-          <div>Покупателям</div>
-          <div>Контакты</div>
+          <Link to="/castomers" className={styles.forCastomers}>Покупателям</Link>
+          <Link to="/contacts" className={styles.media}>
+            Контакты
+          </Link>
         </div>
 
         <div className={styles.logo}>
@@ -48,16 +49,13 @@ const Header = () => {
             onClick={() => setShowCart(true)}
           >
             {/* <PiShoppingCartSimpleThin size={35} style={{ cursor: "pointer" }} /> */}
-            
             Корзина
             {/* <div className={styles.cartCount}>{cartCount}</div> */}
           </div>
           {isAdmin ? (
             <Button variant="light">Личный кабинет</Button>
           ) : (
-            <div  onClick={() => setShowModal(true)}>
-              Войти
-            </div>
+            <div onClick={() => setShowModal(true)}>Войти</div>
           )}
         </div>
       </Container>
