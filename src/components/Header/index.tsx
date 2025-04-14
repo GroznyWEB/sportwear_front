@@ -30,7 +30,7 @@ const Header = () => {
       <Container className={styles.container}>
         <div className={styles.leftNavbar}>
           <div>Каталог</div>
-          <div>Покупателям</div>
+          <Link to="/castomers" className={styles.forCastomers}>Покупателям</Link>
           <Link to="/contacts" className={styles.media}>
             Контакты
           </Link>

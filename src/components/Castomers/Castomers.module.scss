@@ -1,0 +1,46 @@
+.castomers {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 150px;
+    padding-bottom: 62px;
+  
+    h1 {
+      font-size: 36px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+  
+    .item {
+      border-top: 1px solid #ccc;
+      padding: 20px 0;
+    }
+  
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+  
+      h3 {
+        font-size: 20px;
+        margin: 0;
+      }
+    }
+  
+    .content {
+      margin-top: 15px;
+  
+      ul {
+        padding-left: 20px;
+  
+        li {
+          margin-bottom: 10px;
+          list-style-type: disc;
+        }
+      }
+    }
+
+    
+  }
+  
+  

@@ -90,11 +90,21 @@ div img {
 }
 
 .media {
-  color: inherit;           // Наследует цвет от родителя (или задай #000)
-  text-decoration: none;    // Убирает подчеркивание
+  color: inherit;          
+  text-decoration: none;    
 
   &:hover {
-    color: #333;            // Цвет при наведении
-    text-decoration: underline; // Можешь оставить или убрать
+    color: #333;      
+    text-decoration: underline; 
+  }
+}
+
+.forCastomers {
+  color: inherit;          
+  text-decoration: none;    
+
+  &:hover {
+    color: #333;           
+    text-decoration: underline;
   }
 }
