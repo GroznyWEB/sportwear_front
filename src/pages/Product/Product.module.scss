@@ -83,7 +83,6 @@
    border-radius: 5px;
  }
 
- // Кнопка добавления в корзину
  .addToCartBtn {
    //  background-color: #f8f8f8;
    //  color: rgb(18, 17, 17);
@@ -91,9 +90,9 @@
    font-weight: 600;
    padding: 15px 30px;
    border-radius: 8px;
-   cursor: pointer;
+   color: #737373;
    margin-top: 56px;
-   transition: all 0.3s ease; // плавный переход
+   transition: all 0.3s ease; 
    width: 317px;
    text-transform: uppercase;
  }
