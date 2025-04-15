@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Contacts from './components/Contacts'
 import Castomers from './components/Castomers'
+import Reservation from './components/Reservation'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/castomers" element={<Castomers />} />
+        <Route path="/reservation" element={<Reservation/>} />
       </Routes>
       <Footer/>
     </>
