@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Castomers.module.scss";
-import { Plus, X } from "lucide-react"; // Иконки (если используешь lucide-react)
+import { FaPlus } from "react-icons/fa6";
+import { IoCloseSharp } from "react-icons/io5";
 
 const data = [
   {
@@ -42,7 +43,7 @@ const Castomers: React.FC = () => {
         <div key={index} className={styles.item}>
           <div className={styles.header} onClick={() => toggle(index)}>
             <h3>{item.title}</h3>
-            {openIndex === index ? <X size={20} /> : <Plus size={20} />}
+            {openIndex === index ? <IoCloseSharp  size={20} /> : <FaPlus size={20} />}
           </div>
           {openIndex === index && (
             <div className={styles.content}>

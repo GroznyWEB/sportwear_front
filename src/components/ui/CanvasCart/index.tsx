@@ -1,15 +1,17 @@
 
 import { Offcanvas, Button } from "react-bootstrap";
-
+import styles from './CanvasCart.module.scss'
 const CartOffcanvas = ({ show, handleClose }) => {
   return (
-    <Offcanvas show={show} onHide={handleClose} placement="end">
+    <Offcanvas className={styles.cart} show={show} onHide={handleClose} placement="end">
       <Offcanvas.Header closeButton>
         <Offcanvas.Title>Корзина</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
-        Ваша корзина пока пуста.
-        <Button variant="primary" className="mt-3">Оформить заказ</Button>
+        <div>
+          Ваша корзина пока пуста.
+        </div>
+        <Button variant="outline-light" className={styles.btn}>Оформить заказ</Button>
       </Offcanvas.Body>
     </Offcanvas>
   );

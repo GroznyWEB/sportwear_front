@@ -43,7 +43,7 @@ const Header = () => {
         </div>
         <div className={styles.rightNavbar}>
           <div className={styles.media}>WhatsApp</div>
-          <div>Поиск</div>
+          <div>Избранное</div>
           <div
             className={styles.cartIconWrapper}
             onClick={() => setShowCart(true)}
