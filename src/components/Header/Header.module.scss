@@ -108,3 +108,13 @@ div img {
     text-decoration: underline;
   }
 }
+
+.catalog {
+  color: inherit;          
+  text-decoration: none;    
+
+  &:hover {
+    color: #333;           
+    text-decoration: underline;
+  }
+}
