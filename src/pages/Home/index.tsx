@@ -1,14 +1,22 @@
-// src/pages/Home.tsx
-import React from 'react';
+import React, { useRef } from 'react';
 import Catalog from '../../components/Catalog';
+import CustomDoubleCarousel from '../../components/DoubleCarousel';
 
 const Home: React.FC = () => {
+  const catalogRef = useRef<HTMLDivElement>(null);
 
-    return (
-        <>
-            <Catalog />
-        </>
-    );
+  const scrollToCatalog = () => {
+    catalogRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <>
+      <CustomDoubleCarousel scrollToCatalog={scrollToCatalog} />
+      <div ref={catalogRef}>
+        <Catalog />
+      </div>
+    </>
+  );
 };
 
 export default Home;
