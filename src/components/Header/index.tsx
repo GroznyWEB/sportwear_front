@@ -29,8 +29,10 @@ const Header = () => {
     <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
       <Container className={styles.container}>
         <div className={styles.leftNavbar}>
-          <div>Каталог</div>
-          <Link to="/castomers" className={styles.forCastomers}>Покупателям</Link>
+          <Link to="/catalog" className={styles.catalog}> Каталог</Link>
+          <Link to="/castomers" className={styles.forCastomers}>
+            Покупателям
+          </Link>
           <Link to="/contacts" className={styles.media}>
             Контакты
           </Link>
