@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Reservation.module.scss";
+import { handlePhoneChange } from "../../utils/phoneMask";
 
 const Reservation: React.FC = () => {
+
+const [phone, setPhone] = useState("");
+
   return (
     <div className={styles.reservBlock}>
     <div className={styles.choose}>Вы выбрали:</div>
@@ -9,7 +13,10 @@ const Reservation: React.FC = () => {
       {/* Левая часть */}
       <div className={styles.form}>
         <input type="text" placeholder="Ваше имя" />
-        <input type="text" placeholder="+7 (999) 999-99-99" />
+        <input type="text" 
+        placeholder="+7 (___) ___-__-__"
+        value={phone} 
+        onChange={(e) => handlePhoneChange(e, setPhone)}/>
         <button>ЗАБРОНИРОВАТЬ</button>
       </div>
   
