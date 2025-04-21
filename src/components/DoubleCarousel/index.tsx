@@ -21,9 +21,19 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
   const [currentGearIndex, setCurrentGearIndex] = useState(0);
   const [currentClothingIndex, setCurrentClothingIndex] = useState(0);
   const [animate, setAnimate] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Функция для переключения слайдов с анимацией
-  const nextSlide = (type) => {
+  // Проверяем, мобильное ли устройство
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize(); // Проверяем сразу при загрузке
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const nextSlide = (type: "gear" | "clothing") => {
     setAnimate(true);
     setTimeout(() => {
       if (type === "gear") {
@@ -37,12 +47,15 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
 
   useEffect(() => {
     const gearInterval = setInterval(() => nextSlide("gear"), 5000);
-    const clothingInterval = setInterval(() => nextSlide("clothing"), 5000);
+    const clothingInterval = isMobile 
+      ? null 
+      : setInterval(() => nextSlide("clothing"), 5000);
+    
     return () => {
       clearInterval(gearInterval);
-      clearInterval(clothingInterval);
+      if (clothingInterval) clearInterval(clothingInterval);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div className="custom-carousel-container">
@@ -58,6 +71,7 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
       </div>
 
       <div className="double-carousel">
+        {/* Всегда показываем карусель с gearImages */}
         <div className="carousel-column">
           <div className={`carousel-slide ${animate ? "fade-out" : "fade-in"}`}>
             <img
@@ -67,14 +81,17 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
           </div>
         </div>
 
-        <div className="carousel-column">
-          <div className={`carousel-slide ${animate ? "fade-out" : "fade-in"}`}>
-            <img
-              src={clothingImages[currentClothingIndex].src}
-              alt={clothingImages[currentClothingIndex].alt}
-            />
+        {/* Показываем вторую карусель только на десктопе */}
+        {!isMobile && (
+          <div className="carousel-column">
+            <div className={`carousel-slide ${animate ? "fade-out" : "fade-in"}`}>
+              <img
+                src={clothingImages[currentClothingIndex].src}
+                alt={clothingImages[currentClothingIndex].alt}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

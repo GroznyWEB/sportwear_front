@@ -39,6 +39,7 @@
         text-align: center;
         color: var(--color);
         cursor: pointer;
+        position: relative;
 
         img {
             width: 100%;
@@ -94,34 +95,52 @@
     gap: 20px;
     justify-content: space-between;
     padding: 40px 20px;
-  
+
     div {
-      background-color: gray;
-      border-radius: 12px;
-      width: 200px;
-      height: 160px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      padding: 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-  
-      img {
-        width: 40px;
-        height: 40px;
-        margin-bottom: 15px;
-      }
-  
-      .invertIcon {
-        filter: invert(1);
-      }
-  
-      span {
-        font-size: 14px;
-        color: #101010;
-      }
+        background-color: gray;
+        border-radius: 12px;
+        width: 200px;
+        height: 160px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        padding: 20px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 15px;
+        }
+
+        .invertIcon {
+            filter: invert(1);
+        }
+
+        span {
+            font-size: 14px;
+            color: #101010;
+        }
     }
-  }
-  
+}
+
+//   fav
+.favorite {
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    border: 1px solid;
+    padding: 10px;
+
+
+    &:hover {
+        .fav_icon {
+            fill: #db3306;
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    }
+}

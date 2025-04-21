@@ -1,143 +1,130 @@
-.fade-in {
-    animation: fadeIn 0.6s ease-in-out forwards;
-  }
-  
-  .fade-out {
-    animation: fadeOut 0.3s ease-in-out forwards;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.98);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
-  @keyframes fadeOut {
-    from {
-      opacity: 1;
-      transform: scale(1);
-    }
-    to {
-      opacity: 0;
-      transform: scale(1);
-    }
-  }
-
 .custom-carousel-container {
-    margin: 0 auto;
+  margin: 0 auto;
+  margin-top: 120px;
+  position: relative;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+.fade-out {
+  animation: fadeOut 0.3s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.promo-banner {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 8px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color);
+  z-index: 100;
+  // background: rgba(0, 0, 0, 0.7); // Добавим фон для лучшей читаемости
+  width: 90%;
+  max-width: 600px;
+}
+
+.promo-banner h1 {
+  margin-bottom: 15px;
+  text-shadow: 0 4px 8px rgba(253, 219, 219, 0.1);
+  font-size: 1.5rem;
+}
+
+.promo-banner p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.catalog-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #d32f2f;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.catalog-link:hover {
+  background-color: #b71c1c;
+}
+
+.double-carousel {
+  display: flex;
+}
+
+.carousel-column {
+  flex: 1;
+}
+
+.carousel-slide {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // height: 400px; // Фиксированная высота для десктопа
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+  .custom-carousel-container {
     margin-top: 120px;
-
   }
-  
+
   .promo-banner {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 20px;
-    border-radius: 8px;
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--color);
-    z-index: 100;
+    top: 40%;
+    padding: 15px;
   }
-  
-  .promo-banner h1 {
-    margin-bottom: 15px;
-    text-shadow: 0 4px 8px rgba(253, 219, 219, 0.1);
 
+  .promo-banner h1 {
+    font-size: 1.2rem;
   }
-  
+
   .promo-banner p {
-    margin-bottom: 20px;
+    font-size: 0.9rem;
   }
-  
-  .catalog-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #d32f2f;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-  
-  .catalog-link:hover {
-    background-color: #b71c1c;
-  }
-  
+
   .double-carousel {
-    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
-  
-  .carousel-column {
-    flex: 1;
-  }
-  
-  .carousel-column h2 {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #333;
-  }
-  
+
   .carousel-slide {
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    // height: 300px; // Уменьшаем высоту для мобильных
   }
-  
-  .carousel-slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 0.5s ease;
-  }
-  
-  .slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    margin-top: 15px;
-  }
-  
-  .dot {
-    height: 12px;
-    width: 12px;
-    margin: 0 5px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .dot.active {
-    background-color: #d32f2f;
-  }
-  
-  /* Адаптация для мобильных устройств */
-  @media (max-width: 768px) {
-    .double-carousel {
-      flex-direction: column;
-    }
-    
-    .carousel-slide {
-      height: 300px;
-    }
-  }
+}

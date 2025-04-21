@@ -6,6 +6,7 @@ import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
 import FeedbackModal from "../ui/FeedbackModal";
 import { Link } from "react-router-dom";
+import { MdOutlineFavorite } from "react-icons/md";
 
 const products = [
   { id: 1, name: "Griffon white — Shoyoroll", category: "Category 1", price: 7400 },
@@ -83,14 +84,17 @@ const Catalog: React.FC = () => {
 
       <div className={styles.productGrid}>
         {filteredProducts.map((product) => (
-          <Link to={`/product/${product.id}`}>
-            <div key={product.id} className={styles.productCard}>
+          <Link key={product.id} to={`/product/${product.id}`}>
+            <div className={styles.productCard}>
+              {/* TODO - после бэка добавить логику для добавления в избранное */}
+              <div className={styles.favorite}>
+                <MdOutlineFavorite size={25} className={styles.fav_icon} />
+              </div>
               <img src="/adam-gi.jpeg" alt="фото продукта" />
               <h4>{product.name}</h4>
-              <p className={styles.price}>{product.price} ₽</p>
-              {/* <Button className="w-100" variant="outline-light">
-                Подробнее
-              </Button> */}
+              <p className={styles.price}>
+                {product.price.toLocaleString("ru-RU")} ₽
+              </p>
             </div>
           </Link>
         ))}
