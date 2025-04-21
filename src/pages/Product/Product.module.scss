@@ -369,3 +369,69 @@
    border: 1px;
    border-radius: 1px;
  }
+
+ @media (max-width: 768px) {
+    .content {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .image {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  
+    .details {
+      width: 100%;
+      padding: 15px;
+      height: auto;
+    }
+  
+    .addToCartBtn {
+      width: 100%;
+      margin-top: 30px;
+    }
+  
+    .slider {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .mainImage {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .modalImage {
+      width: 100%;
+      max-width: 90%;
+    }
+  
+    .modalPrevBtn,
+    .modalNextBtn {
+      font-size: 1.5rem;
+      left: 10px;
+      right: 10px;
+    }
+  
+    .sizeTable table {
+      font-size: 12px;
+    }
+  
+    .sizeTable th,
+    .sizeTable td {
+      padding: 8px 10px;
+    }
+  
+    .sizeBtn {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  
+    .sizes {
+      gap: 10px;
+      justify-content: center;
+    }
+  }
+  
