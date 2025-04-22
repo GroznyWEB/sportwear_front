@@ -47,6 +47,10 @@
   left: 50%;
   transform: translateX(-50%);
   transition: all 0.3s ease-in-out;
+
+  // .mobileLogo {
+  //   width: 150px;
+  // }
 }
 
 .header.shrink .logo img {
@@ -84,7 +88,7 @@
   font-weight: bold;
 }
 
-div img {
+.logo img {
   width: 170px;
   height: 130px;
 }
@@ -117,4 +121,105 @@ div img {
     color: #333;           
     text-decoration: underline;
   }
+}
+
+// mobile
+.mobileMenu {
+  background-color: #0e0e0f!important;
+  color: var(--color);
+
+}
+
+.menuHeader {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color);
+}
+
+.menuTitle {
+  font-weight: 600;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.menuBody {
+  padding: 0;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.navLink {
+  color: var(--color);
+  padding: 1rem 2rem;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid #d32f2f;
+  color: #f8f9fa;
+}
+
+.navIcon {
+  margin-right: 1rem;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.mobileContacts {
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contactsTitle {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+  color: var(--color);
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  color: var(--color);
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.whatsapp {
+  background: #2cb742;
+  color: #f8f9fa;
+}
+
+.whatsapp:hover {
+  background:  #2cb741df;
+  color: #f8f9fa;
+ 
+}
+
+.loginBtn {
+  background: rgba(41, 128, 185, 0.1);
+}
+
+.loginBtn:hover {
+  background: rgba(41, 128, 185, 0.2);
+}
+
+.contactIcon {
+  margin-right: 1rem;
+  font-size: 1.2rem;
 }

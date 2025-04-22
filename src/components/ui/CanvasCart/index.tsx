@@ -4,8 +4,8 @@ import styles from './CanvasCart.module.scss'
 const CartOffcanvas = ({ show, handleClose }) => {
   return (
     <Offcanvas className={styles.cart} show={show} onHide={handleClose} placement="end">
-      <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Корзина</Offcanvas.Title>
+      <Offcanvas.Header className={styles.title} closeButton>
+        <Offcanvas.Title>Корзина:</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <div>

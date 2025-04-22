@@ -1,1 +1,61 @@
-// scss
+.productCard {
+    border-radius: 8px;
+    text-align: center;
+    color: var(--color);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; // Добавлено для корректного отображения анимации
+    transition: transform 0.3s ease; // Плавное изменение всей карточки
+
+    &:hover {
+        transform: translateY(-5px); // Легкий подъем карточки при наведении
+        
+        
+            transform: scale(1.02); // Увеличение изображения
+        
+    }
+
+
+    img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        object-fit: cover;
+        transition: transform 0.3s ease; // Плавное увеличение изображения
+    }
+
+    h4 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 800;
+        transition: color 0.3s ease; // Плавное изменение цвета текста
+    }
+
+    p {
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+
+}
+
+.favorite {
+    border-radius: 50%;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    border: 1px solid;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8); // Добавлен фон для лучшей видимости
+    z-index: 1; // Чтобы иконка была поверх изображения
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: scale(1.1);
+        
+        .fav_icon {
+            fill: #db3306;
+        }
+    }
+}
