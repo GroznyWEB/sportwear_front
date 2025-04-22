@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Product.module.scss";
-import { Container } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const products = [
-  { id: 1, name: "Product 1", category: "Category 1", price: 7400 },
+  { id: 1, name: "Кимоно для БЖЖ Submission", category: "Кимоно", price: 7400, description: "Профессиональное кимоно для бразильского джиу-джитсу", features: [
+    "Куртка и штаны выполнены из хлопка высокой плотности",
+    "Усиленные швы для повышенной износостойкости",
+    "Поставляется в удобной сумке для переноски",
+    "Доступно в различных цветах"
+  ] },
   { id: 2, name: "Product 2", category: "Category 2", price: 10050 },
   { id: 3, name: "Product 3", category: "Category 3", price: 3000 },
   { id: 4, name: "Product 4", category: "Category 4", price: 11000 },
@@ -14,228 +21,166 @@ const products = [
   { id: 8, name: "Product 8", category: "Category 2", price: 7700 },
 ];
 
-// Компонент слайдера изображений
-const ProductSlider = ({ galleryImages }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const sizeOptions = ["A00", "A0", "A1", "A1L", "A2", "A2L", "A2H", "A3", "A3L", "A3H", "A4", "A5"];
 
-  const prevSlide = () => {
-    const index =
-      currentIndex === 0 ? galleryImages.length - 1 : currentIndex - 1;
-    setCurrentIndex(index);
-  };
-
-  const nextSlide = () => {
-    const index =
-      currentIndex === galleryImages.length - 1 ? 0 : currentIndex + 1;
-    setCurrentIndex(index);
-  };
-
-  const setSlide = (index) => {
-    setCurrentIndex(index);
-  };
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
-  return (
-    <div className={styles.sliderContainer}>
-      <div className={styles.slider}>
-        <div className={styles.thumbnails}>
-          {galleryImages.map((image, index) => (
-            <img
-              key={index}
-              src={image}
-              alt={`Thumbnail ${index + 1}`}
-              className={`${styles.thumbnail} ${currentIndex === index ? styles.activeThumbnail : ""}`}
-              onClick={() => setSlide(index)}
-            />
-          ))}
-        </div>
-
-        <div className={styles.mainImage} onClick={openModal}>
-          <img src={galleryImages[currentIndex]} alt="Главное изображение" />
-        </div>
-
-        <button className={styles.prevBtn} onClick={prevSlide}>
-          &#10094;
-        </button>
-        <button className={styles.nextBtn} onClick={nextSlide}>
-          &#10095;
-        </button>
-      </div>
-
-      {isModalOpen && (
-        <div className={styles.modal} onClick={closeModal}>
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <span className={styles.closeModal} onClick={closeModal}>
-              &times;
-            </span>
-            <div className={styles.modalImageWrapper}>
-              <button className={styles.modalPrevBtn} onClick={prevSlide}>
-                &#10094;
-              </button>
-              <img
-                className={styles.modalImage}
-                src={galleryImages[currentIndex]}
-                alt="Увеличенное изображение"
-              />
-              <button className={styles.modalNextBtn} onClick={nextSlide}>
-                &#10095;
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+const sizeTableData = [
+  { size: "A0", height: "152 - 165", weight: "45.4 - 63.5" },
+  { size: "A1", height: "157 - 168", weight: "49.9 - 68" },
+  { size: "A2", height: "173 - 183", weight: "74.8 - 94" },
+  { size: "A2L", height: "180 - 191", weight: "74.8 - 99.8" },
+  { size: "A3", height: "180 - 191", weight: "81.6 - 104" },
+  { size: "A3L", height: "188 - 196", weight: "81.6 - 109" },
+  { size: "A4", height: "188 - 196", weight: "90.7 - 118" },
+  { size: "A5", height: "196 - 203", weight: "90.7 - 122" },
+];
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [quantity, setQuantity] = useState(1);
+  
   const product = products.find((product) => product.id === Number(id));
-
   const galleryImages = ["/adam-gi.jpeg", "/adam-gi-2.jpeg", "/adam-gi-3.jpeg"];
 
   if (!product) {
-    return <div>Продукт не найден</div>;
+    return <div className={styles.notFound}>Продукт не найден</div>;
   }
 
+  const images = galleryImages.map((image) => ({
+    original: image,
+    thumbnail: image,
+  }));
+
+  const handleSizeSelect = (size: string) => {
+    setSelectedSize(size === selectedSize ? null : size);
+  };
+
+  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value);
+    if (!isNaN(value) && value > 0) {
+      setQuantity(value);
+    }
+  };
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      alert("Пожалуйста, выберите размер");
+      return;
+    }
+    // Здесь будет логика добавления в корзину
+    alert(`Добавлено в корзину: ${product.name}, размер: ${selectedSize}, количество: ${quantity}`);
+  };
+
   return (
-    <Container>
-      <h1 className={styles.name}>{product.name}</h1>
+    <Container className={styles.container}>
+      <h1 className={styles.productTitle}>{product.name}</h1>
 
-      <div className={styles.content}>
-        <div className={styles.image}>
-          <ProductSlider galleryImages={galleryImages} />
-        </div>
+      <Row className={styles.productRow}>
+        <Col lg={6} className={styles.galleryCol}>
+          <div className={styles.galleryWrapper}>
+            <ImageGallery 
+              items={images} 
+              showPlayButton={false}
+              showFullscreenButton={true}
+              showNav={true}
+              thumbnailPosition="bottom"
+              additionalClass={styles.customGallery}
+            />
+          </div>
+        </Col>
 
-        <div className={styles.details}>
-          <p>Категория: {product.category}</p>
-          <p className={styles.price}>Цена: {product.price} ₽</p>
+        <Col lg={6} className={styles.detailsCol}>
+          <div className={styles.detailsCard}>
+            <div className={styles.productMeta}>
+              <span className={styles.category}>{product.category}</span>
+              <span className={styles.price}>{product.price.toLocaleString()} ₽</span>
+            </div>
 
-          <div className={styles.size}>
-            <p>Выберите размер</p>
-            <div className={styles.sizes}>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A00</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A0</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A1</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A1L</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A2</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A2L</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A2H</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A3</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A3L</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A3H</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A4</button>
-              </div>
-              <div className={styles.sizeItem}>
-                <button className={styles.sizeBtn}>A5</button>
+            <div className={styles.sizeSection}>
+              <h3 className={styles.sectionTitle}>Выберите размер</h3>
+              <div className={styles.sizeGrid}>
+                {sizeOptions.map((size) => (
+                  <button
+                    key={size}
+                    className={`${styles.sizeButton} ${selectedSize === size ? styles.selected : ''}`}
+                    onClick={() => handleSizeSelect(size)}
+                  >
+                    {size}
+                  </button>
+                ))}
               </div>
             </div>
+
+            <div className={styles.quantitySection}>
+              <label htmlFor="quantity" className={styles.quantityLabel}>Количество:</label>
+              <input
+                type="number"
+                id="quantity"
+                value={quantity}
+                min="1"
+                onChange={handleQuantityChange}
+                className={styles.quantityInput}
+              />
+            </div>
+
+            <button 
+              className={styles.addToCartButton}
+              onClick={handleAddToCart}
+            >
+              ДОБАВИТЬ В КОРЗИНУ
+            </button>
           </div>
+        </Col>
+      </Row>
 
-          <div className={styles.quantity}>
-            <label htmlFor="quantity">Количество:</label>
-            <input type="number" id="quantity" defaultValue="1" min="1" />
+      <Row>
+        <Col lg={12}>
+          <div className={styles.descriptionSection}>
+            <h2 className={styles.sectionTitle}>Описание</h2>
+            <p className={styles.descriptionText}>{product.description || "Кимоно(ги) для БЖЖ (бразильское джиу-джитсу)"}</p>
+            
+            <ul className={styles.featuresList}>
+              {(product.features || [
+                "Куртка и штаны выполнены из хлопка высокой плотности",
+                "Поставляется ги в удобной сумке для переноски"
+              ]).map((feature, index) => (
+                <li key={index} className={styles.featureItem}>
+                  <span className={styles.featureIcon}>✓</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
           </div>
+        </Col>
+      </Row>
 
-          <button className={styles.addToCartBtn}>ДОБАВИТЬ В КОРЗИНУ</button>
-        </div>
-      </div>
-
-      <div className={styles.productDescription}>
-        <h2>Описание</h2>
-        <p>Кимоно(ги) для БЖЖ (бразильское джиу-джитсу)...</p>
-        <ul className={styles.features}>
-          <li>Куртка и штаны выполнены из хлопка...</li>
-          <li>Поставляется ги в сумке...</li>
-        </ul>
-      </div>
-
-      <div className={styles.sizeTable}>
-        <h3>Условная таблица размеров ги для БЖЖ от Submission:</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Размер</th>
-              <th>Рост атлета (см)</th>
-              <th>Вес атлета (кг)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>A0</td>
-              <td>152 - 165</td>
-              <td>45.4 - 63.5</td>
-            </tr>
-            <tr>
-              <td>A1</td>
-              <td>157 - 168</td>
-              <td>49.9 - 68</td>
-            </tr>
-            <tr>
-              <td>A2</td>
-              <td>173 - 183</td>
-              <td>74.8 - 94</td>
-            </tr>
-            <tr>
-              <td>A2L</td>
-              <td>180 - 191</td>
-              <td>74.8 - 99.8</td>
-            </tr>
-            <tr>
-              <td>A3</td>
-              <td>180 - 191</td>
-              <td>81.6 - 104</td>
-            </tr>
-            <tr>
-              <td>A3L</td>
-              <td>188 - 196</td>
-              <td>81.6 - 109</td>
-            </tr>
-            <tr>
-              <td>A4</td>
-              <td>188 - 196</td>
-              <td>90.7 - 118</td>
-            </tr>
-            <tr>
-              <td>A5</td>
-              <td>196 - 203</td>
-              <td>90.7 - 122</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <Row>
+        <Col lg={12}>
+          <div className={styles.sizeTableSection}>
+            <h3 className={styles.sectionTitle}>Таблица размеров</h3>
+            <div className={styles.tableResponsive}>
+              <table className={styles.sizeTable}>
+                <thead>
+                  <tr>
+                    <th>Размер</th>
+                    <th>Рост атлета (см)</th>
+                    <th>Вес атлета (кг)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sizeTableData.map((row, index) => (
+                    <tr key={index}>
+                      <td>{row.size}</td>
+                      <td>{row.height}</td>
+                      <td>{row.weight}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 };

@@ -7,6 +7,7 @@ import { Container } from "react-bootstrap";
 import FeedbackModal from "../ui/FeedbackModal";
 import { Link } from "react-router-dom";
 import { MdOutlineFavorite } from "react-icons/md";
+import ProductCard from "../ProductCard";
 
 const products = [
   { id: 1, name: "Griffon white — Shoyoroll", category: "Category 1", price: 7400 },
@@ -84,58 +85,46 @@ const Catalog: React.FC = () => {
 
       <div className={styles.productGrid}>
         {filteredProducts.map((product) => (
-          <Link key={product.id} to={`/product/${product.id}`}>
-            <div className={styles.productCard}>
-              {/* TODO - после бэка добавить логику для добавления в избранное */}
-              <div className={styles.favorite}>
-                <MdOutlineFavorite size={25} className={styles.fav_icon} />
-              </div>
-              <img src="/adam-gi.jpeg" alt="фото продукта" />
-              <h4>{product.name}</h4>
-              <p className={styles.price}>
-                {product.price.toLocaleString("ru-RU")} ₽
-              </p>
-            </div>
-          </Link>
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
       <div className={styles.feedBack}>
         <FeedbackModal />
       </div>
       <div className={styles.artBoard}>
-        <div>
-          <img
-            src="/delivery-box.png"
-            alt="Доставка"
-            className={styles.invertIcon}
-          />
-          <span>Бесплатная доставка по всей России</span>
-        </div>
-        <div>
-          <img
-            src="/certificate.png"
-            alt="Сертификат"
-            className={styles.invertIcon}
-          />
-          <span>Бренд запатентован</span>
-        </div>
-        <div>
-          <img src="/guarantee.png" alt="Гарантия" />
-          <span>Гарантия 6 месяцев</span>
-        </div>
-        <div>
-          <img
-            src="/shopping-bag.png"
-            alt="Оплата"
-            className={styles.invertIcon}
-          />
-          <span>Онлайн оплата на нашем сайте</span>
-        </div>
-        <div>
-          <img src="/competition.png" alt="ACA" />
-          <span>Бойцы ACA доверяют нам</span>
-        </div>
-      </div>
+  <div className={styles.featureCard}>
+    <img
+      src="/delivery-box.png"
+      alt="Доставка"
+      className={styles.invertIcon}
+    />
+    <span>Бесплатная доставка по всей России</span>
+  </div>
+  <div className={styles.featureCard}>
+    <img
+      src="/certificate.png"
+      alt="Сертификат"
+      className={styles.invertIcon}
+    />
+    <span>Бренд запатентован</span>
+  </div>
+  <div className={styles.featureCard}>
+    <img src="/guarantee.png" alt="Гарантия" />
+    <span>Гарантия 6 месяцев</span>
+  </div>
+  <div className={styles.featureCard}>
+    <img
+      src="/shopping-bag.png"
+      alt="Оплата"
+      className={styles.invertIcon}
+    />
+    <span>Онлайн оплата на нашем сайте</span>
+  </div>
+  <div className={styles.featureCard}>
+    <img src="/competition.png" alt="ACA" />
+    <span>Бойцы ACA доверяют нам</span>
+  </div>
+</div>
     </Container>
   );
 };
