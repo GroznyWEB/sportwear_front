@@ -1,34 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import Button from "react-bootstrap/Button";
 import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
 import FeedbackModal from "../ui/FeedbackModal";
-import { Link } from "react-router-dom";
-import { MdOutlineFavorite } from "react-icons/md";
 import ProductCard from "../ProductCard";
 
-const products = [
-  { id: 1, name: "Griffon white — Shoyoroll", category: "Category 1", price: 7400 },
-  { id: 2, name: "Griffon white — Shoyoroll 2", category: "Category 2", price: 10050 },
-  { id: 3, name: "Griffon white — Shoyoroll 3", category: "Category 3", price: 3000 },
-  { id: 4, name: "Griffon white — Shoyoroll 4", category: "Category 4", price: 11000 },
-  { id: 5, name: "Griffon white — Shoyoroll 5", category: "Category 3", price: 9500 },
-  { id: 6, name: "Griffon white — Shoyoroll 6", category: "Category 2", price: 7500 },
-  { id: 7, name: "Griffon white — Shoyoroll 7", category: "Category 1", price: 6500 },
-  { id: 8, name: "Griffon white — Shoyoroll 8", category: "Category 2", price: 7700 },
-];
-
-const categories = ["Category 1", "Category 2", "Category 3", "Category 4"];
 const sortOptions = [
   { key: "asc", label: "По возрастанию цены" },
   { key: "desc", label: "По убыванию цены" },
 ];
 
 const Catalog: React.FC = () => {
+  const [products, setProducts] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState<string>("asc");
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("http://localhost:4000/product"); // замени на свой путь
+        const data = await response.json();
+        console.log('Что пришло с бэка:', data);
+        setProducts(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке товаров:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  const categories = Array.from(new Set(products.map((product) => product.category)));
 
   const filteredProducts = products
     .filter(
@@ -45,6 +51,10 @@ const Catalog: React.FC = () => {
   const handleSortSelect = (option: string | null) => {
     setSortOption(option ?? "asc");
   };
+
+  if (loading) {
+    return <div className={styles.loading}>Загрузка товаров...</div>;
+  }
 
   return (
     <Container className={styles.container}>
@@ -85,46 +95,58 @@ const Catalog: React.FC = () => {
 
       <div className={styles.productGrid}>
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+        <ProductCard 
+        key={product._id} 
+        product={{ 
+          id: product._id, 
+          name: product.name, 
+          description: product.description,
+          brend: product.brend,
+          price: product.price,
+          image: product.image
+        }} 
+      />
         ))}
       </div>
+
       <div className={styles.feedBack}>
         <FeedbackModal />
       </div>
+
       <div className={styles.artBoard}>
-  <div className={styles.featureCard}>
-    <img
-      src="/delivery-box.png"
-      alt="Доставка"
-      className={styles.invertIcon}
-    />
-    <span>Бесплатная доставка по всей России</span>
-  </div>
-  <div className={styles.featureCard}>
-    <img
-      src="/certificate.png"
-      alt="Сертификат"
-      className={styles.invertIcon}
-    />
-    <span>Бренд запатентован</span>
-  </div>
-  <div className={styles.featureCard}>
-    <img src="/guarantee.png" alt="Гарантия" />
-    <span>Гарантия 6 месяцев</span>
-  </div>
-  <div className={styles.featureCard}>
-    <img
-      src="/shopping-bag.png"
-      alt="Оплата"
-      className={styles.invertIcon}
-    />
-    <span>Онлайн оплата на нашем сайте</span>
-  </div>
-  <div className={styles.featureCard}>
-    <img src="/competition.png" alt="ACA" />
-    <span>Бойцы ACA доверяют нам</span>
-  </div>
-</div>
+        <div className={styles.featureCard}>
+          <img
+            src="/delivery-box.png"
+            alt="Доставка"
+            className={styles.invertIcon}
+          />
+          <span>Бесплатная доставка по всей России</span>
+        </div>
+        <div className={styles.featureCard}>
+          <img
+            src="/certificate.png"
+            alt="Сертификат"
+            className={styles.invertIcon}
+          />
+          <span>Бренд запатентован</span>
+        </div>
+        <div className={styles.featureCard}>
+          <img src="/guarantee.png" alt="Гарантия" />
+          <span>Гарантия 6 месяцев</span>
+        </div>
+        <div className={styles.featureCard}>
+          <img
+            src="/shopping-bag.png"
+            alt="Оплата"
+            className={styles.invertIcon}
+          />
+          <span>Онлайн оплата на нашем сайте</span>
+        </div>
+        <div className={styles.featureCard}>
+          <img src="/competition.png" alt="ACA" />
+          <span>Бойцы ACA доверяют нам</span>
+        </div>
+      </div>
     </Container>
   );
 };
