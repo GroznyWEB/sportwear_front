@@ -1,27 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./Product.module.scss";
 import { Container, Row, Col } from "react-bootstrap";
-import ImageGallery from 'react-image-gallery';
-import 'react-image-gallery/styles/css/image-gallery.css';
+import ImageGallery from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
 
-const products = [
-  { id: 1, name: "Кимоно для БЖЖ Submission", category: "Кимоно", price: 7400, description: "Профессиональное кимоно для бразильского джиу-джитсу", features: [
-    "Куртка и штаны выполнены из хлопка высокой плотности",
-    "Усиленные швы для повышенной износостойкости",
-    "Поставляется в удобной сумке для переноски",
-    "Доступно в различных цветах"
-  ] },
-  { id: 2, name: "Product 2", category: "Category 2", price: 10050 },
-  { id: 3, name: "Product 3", category: "Category 3", price: 3000 },
-  { id: 4, name: "Product 4", category: "Category 4", price: 11000 },
-  { id: 5, name: "Product 5", category: "Category 3", price: 9500 },
-  { id: 6, name: "Product 6", category: "Category 2", price: 7500 },
-  { id: 7, name: "Product 7", category: "Category 1", price: 6500 },
-  { id: 8, name: "Product 8", category: "Category 2", price: 7700 },
+const sizeOptions = [
+  "A00", "A0", "A1", "A1L", "A2", "A2L", "A2H", "A3", "A3L", "A3H", "A4", "A5"
 ];
-
-const sizeOptions = ["A00", "A0", "A1", "A1L", "A2", "A2L", "A2H", "A3", "A3L", "A3H", "A4", "A5"];
 
 const sizeTableData = [
   { size: "A0", height: "152 - 165", weight: "45.4 - 63.5" },
@@ -36,20 +22,42 @@ const sizeTableData = [
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<any>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
-  
-  const product = products.find((product) => product.id === Number(id));
-  const galleryImages = ["/adam-gi.jpeg", "/adam-gi-2.jpeg", "/adam-gi-3.jpeg"];
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:4000/product/${id}`);
+        if (!response.ok) {
+          throw new Error(`Ошибка: ${response.statusText}`);
+        }
+        const data = await response.json();
+        if (data) {
+          console.log("Продукт загружен:", data);
+          setProduct(data);
+        } else {
+          throw new Error("Продукт не найден");
+        }
+      } catch (error) {
+        console.error("Ошибка при загрузке продукта:", error);
+        alert("Не удалось загрузить данные о продукте");
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
   if (!product) {
     return <div className={styles.notFound}>Продукт не найден</div>;
   }
 
-  const images = galleryImages.map((image) => ({
-    original: image,
-    thumbnail: image,
-  }));
+  const galleryImages = Array.isArray(product.image)
+    ? product.image.map((img: string) => ({
+        original: `http://localhost:4000/images/${img}`,
+        thumbnail: `http://localhost:4000/images/${img}`,
+      }))
+    : [];
 
   const handleSizeSelect = (size: string) => {
     setSelectedSize(size === selectedSize ? null : size);
@@ -67,33 +75,40 @@ const Product: React.FC = () => {
       alert("Пожалуйста, выберите размер");
       return;
     }
-    // Здесь будет логика добавления в корзину
     alert(`Добавлено в корзину: ${product.name}, размер: ${selectedSize}, количество: ${quantity}`);
   };
 
   return (
     <Container className={styles.container}>
-      <h1 className={styles.productTitle}>{product.name}</h1>
+      <h1 className={styles.productTitle}>{product.name || "Без названия"}</h1>
 
       <Row className={styles.productRow}>
         <Col lg={6} className={styles.galleryCol}>
           <div className={styles.galleryWrapper}>
-            <ImageGallery 
-              items={images} 
-              showPlayButton={false}
-              showFullscreenButton={true}
-              showNav={true}
-              thumbnailPosition="bottom"
-              additionalClass={styles.customGallery}
-            />
+            {galleryImages.length > 0 ? (
+              <ImageGallery 
+                items={galleryImages} 
+                showPlayButton={false}
+                showFullscreenButton={true}
+                showNav={true}
+                thumbnailPosition="bottom"
+                additionalClass={styles.customGallery}
+              />
+            ) : (
+              <div className={styles.noImages}>Изображения отсутствуют</div>
+            )}
           </div>
         </Col>
 
         <Col lg={6} className={styles.detailsCol}>
           <div className={styles.detailsCard}>
             <div className={styles.productMeta}>
-              <span className={styles.category}>{product.category}</span>
-              <span className={styles.price}>{product.price.toLocaleString()} ₽</span>
+              <span className={styles.category}>
+                {product.category || "Категория не указана"}
+              </span>
+              <span className={styles.price}>
+                {product.price ? `${product.price.toLocaleString()} ₽` : "Цена не указана"}
+              </span>
             </div>
 
             <div className={styles.sizeSection}>
@@ -137,19 +152,20 @@ const Product: React.FC = () => {
         <Col lg={12}>
           <div className={styles.descriptionSection}>
             <h2 className={styles.sectionTitle}>Описание</h2>
-            <p className={styles.descriptionText}>{product.description || "Кимоно(ги) для БЖЖ (бразильское джиу-джитсу)"}</p>
+            <p className={styles.descriptionText}>
+              {product.description || "Описание отсутствует"}
+            </p>
             
-            <ul className={styles.featuresList}>
-              {(product.features || [
-                "Куртка и штаны выполнены из хлопка высокой плотности",
-                "Поставляется ги в удобной сумке для переноски"
-              ]).map((feature, index) => (
-                <li key={index} className={styles.featureItem}>
-                  <span className={styles.featureIcon}>✓</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            {Array.isArray(product.features) && product.features.length > 0 && (
+              <ul className={styles.featuresList}>
+                {product.features.map((feature: string, index: number) => (
+                  <li key={index} className={styles.featureItem}>
+                    <span className={styles.featureIcon}>✓</span>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </Col>
       </Row>
