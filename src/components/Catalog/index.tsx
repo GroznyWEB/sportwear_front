@@ -101,9 +101,9 @@ const Catalog: React.FC = () => {
           id: product._id, 
           name: product.name, 
           description: product.description,
-          brend: product.brend,
+          brend: product.brand,
           price: product.price,
-          image: product.image
+          images: product.images
         }} 
       />
         ))}

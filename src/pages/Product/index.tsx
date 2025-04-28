@@ -52,11 +52,11 @@ const Product: React.FC = () => {
     return <div className={styles.notFound}>Продукт не найден</div>;
   }
 
-  const galleryImages = Array.isArray(product.image)
-    ? product.image.map((img: string) => ({
-        original: `http://localhost:4000/images/${img}`,
-        thumbnail: `http://localhost:4000/images/${img}`,
-      }))
+  const galleryImages = Array.isArray(product.images)
+    ? product.images.map((img: string) => ({
+      original: `http://localhost:4000/images/${img}`,
+      thumbnail: `http://localhost:4000/images/${img}`,
+    }))
     : [];
 
   const handleSizeSelect = (size: string) => {
@@ -86,8 +86,8 @@ const Product: React.FC = () => {
         <Col lg={6} className={styles.galleryCol}>
           <div className={styles.galleryWrapper}>
             {galleryImages.length > 0 ? (
-              <ImageGallery 
-                items={galleryImages} 
+              <ImageGallery
+                items={galleryImages}
                 showPlayButton={false}
                 showFullscreenButton={true}
                 showNav={true}
@@ -138,37 +138,35 @@ const Product: React.FC = () => {
               />
             </div>
 
-            <button 
+            <button
               className={styles.addToCartButton}
               onClick={handleAddToCart}
             >
               ДОБАВИТЬ В КОРЗИНУ
             </button>
+              <Col lg={12}>
+                <div className={styles.descriptionSection}>
+                  <h2 className={styles.sectionTitle}>Описание</h2>
+                  <p className={styles.descriptionText}>
+                    {product.description || "Описание отсутствует"}
+                  </p>
+
+                  {Array.isArray(product.features) && product.features.length > 0 && (
+                    <ul className={styles.featuresList}>
+                      {product.features.map((feature: string, index: number) => (
+                        <li key={index} className={styles.featureItem}>
+                          <span className={styles.featureIcon}>✓</span>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </Col>
           </div>
         </Col>
       </Row>
 
-      <Row>
-        <Col lg={12}>
-          <div className={styles.descriptionSection}>
-            <h2 className={styles.sectionTitle}>Описание</h2>
-            <p className={styles.descriptionText}>
-              {product.description || "Описание отсутствует"}
-            </p>
-            
-            {Array.isArray(product.features) && product.features.length > 0 && (
-              <ul className={styles.featuresList}>
-                {product.features.map((feature: string, index: number) => (
-                  <li key={index} className={styles.featureItem}>
-                    <span className={styles.featureIcon}>✓</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </Col>
-      </Row>
 
       <Row>
         <Col lg={12}>
