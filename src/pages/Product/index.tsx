@@ -4,6 +4,7 @@ import styles from "./Product.module.scss";
 import { Container, Row, Col } from "react-bootstrap";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
+import { API_URL } from "../../config";
 
 const sizeOptions = [
   "A00", "A0", "A1", "A1L", "A2", "A2L", "A2H", "A3", "A3L", "A3H", "A4", "A5"
@@ -54,8 +55,8 @@ const Product: React.FC = () => {
 
   const galleryImages = Array.isArray(product.images)
     ? product.images.map((img: string) => ({
-      original: `http://localhost:4000/images/${img}`,
-      thumbnail: `http://localhost:4000/images/${img}`,
+      original: `${API_URL}/images/${img}`,
+      thumbnail: `${API_URL}/images/${img}`,
     }))
     : [];
 

@@ -5,6 +5,13 @@ import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
 import FeedbackModal from "../ui/FeedbackModal";
 import ProductCard from "../ProductCard";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { GrCertificate } from "react-icons/gr";
+import { TbCertificate, TbTruckDelivery } from "react-icons/tb";
+import { AiOutlineSafetyCertificate } from "react-icons/ai";
+import { MdOutlinePayment } from "react-icons/md";
+import { LuHandshake } from "react-icons/lu";
+import { API_URL } from "../../config";
 
 const sortOptions = [
   { key: "asc", label: "По возрастанию цены" },
@@ -20,7 +27,7 @@ const Catalog: React.FC = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:4000/product"); // замени на свой путь
+        const response = await fetch(`${API_URL}/product`); // замени на свой путь
         const data = await response.json();
         console.log('Что пришло с бэка:', data);
         setProducts(data);
@@ -101,7 +108,7 @@ const Catalog: React.FC = () => {
           id: product._id, 
           name: product.name, 
           description: product.description,
-          brend: product.brand,
+          brand: product.brand,
           price: product.price,
           images: product.images
         }} 
@@ -115,35 +122,32 @@ const Catalog: React.FC = () => {
 
       <div className={styles.artBoard}>
         <div className={styles.featureCard}>
-          <img
-            src="/delivery-box.png"
-            alt="Доставка"
-            className={styles.invertIcon}
+          <TbTruckDelivery 
+            size={50}
+            color="black"
           />
           <span>Бесплатная доставка по всей России</span>
         </div>
         <div className={styles.featureCard}>
-          <img
-            src="/certificate.png"
-            alt="Сертификат"
-            className={styles.invertIcon}
+          <TbCertificate  
+            size={50}
+            color="black"
           />
           <span>Бренд запатентован</span>
         </div>
         <div className={styles.featureCard}>
-          <img src="/guarantee.png" alt="Гарантия" />
+          <AiOutlineSafetyCertificate size={50} color='black' />
           <span>Гарантия 6 месяцев</span>
         </div>
         <div className={styles.featureCard}>
-          <img
-            src="/shopping-bag.png"
-            alt="Оплата"
-            className={styles.invertIcon}
+          <MdOutlinePayment 
+          size={50}
+          color="black" 
           />
           <span>Онлайн оплата на нашем сайте</span>
         </div>
         <div className={styles.featureCard}>
-          <img src="/competition.png" alt="ACA" />
+          <LuHandshake  size={50} color="black" />
           <span>Бойцы ACA доверяют нам</span>
         </div>
       </div>

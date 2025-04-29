@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./index.scss";
+import { API_URL } from "../../config";
 
 interface Props {
   scrollToCatalog: () => void;
@@ -7,15 +8,15 @@ interface Props {
 
 const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
   const gearImages = [
-    { src: "/adam-gi.jpeg", alt: "Боксерские перчатки" },
-    { src: "/adam-gi-2.jpeg", alt: "Шорты для ММА" },
-    { src: "/adam-gi-3.jpeg", alt: "Защита для тренировок" },
+    { src: `${API_URL}/images/red-other1.webp`, alt: "Боксерские перчатки" },
+    { src: `${API_URL}/images/sub-red8.webp`, alt: "Шорты для ММА" },
+    { src: `${API_URL}/images/sub-yellow2.webp`, alt: "Защита для тренировок" },
   ];
 
   const clothingImages = [
-    { src: "/adam-gi.jpeg", alt: "Футболка тренировочная" },
-    { src: "/adam-gi-2.jpeg", alt: "Штаны для единоборств" },
-    { src: "/adam-gi-3.jpeg", alt: "Толстовка с логотипом" },
+    { src: `${API_URL}/images/red-other8.webp`, alt: "Футболка тренировочная" },
+    { src: `${API_URL}/images/sub-white11.webp`, alt: "Штаны для единоборств" },
+    { src: `${API_URL}/images/sub-yellow6.webp`, alt: "Толстовка с логотипом" },
   ];
 
   const [currentGearIndex, setCurrentGearIndex] = useState(0);
