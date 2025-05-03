@@ -1,23 +1,41 @@
 import { useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 
-const LoginModal = ({ show, handleClose, handleLoginSuccess }) => {
-  const [formData, setFormData] = useState({ login: "", password: "" });
+type LoginModalProps = {
+  show: boolean;
+  handleClose: () => void;
+  handleLoginSuccess: () => void;
+};
 
-  const handleInputChange = (e) => {
+type FormData = {
+  login: string;
+  password: string;
+};
+
+const LoginModal: React.FC<LoginModalProps> = ({
+  show,
+  handleClose,
+  handleLoginSuccess,
+}) => {
+  const [formData, setFormData] = useState<FormData>({
+    login: "",
+    password: "",
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
   const handleSubmit = () => {
     console.log("Login:", formData.login, "Password:", formData.password);
 
     if (formData.login === "admin" && formData.password === "password") {
-      handleLoginSuccess(); 
-      handleClose(); 
+      handleLoginSuccess();
+      handleClose();
     } else {
       alert("Неверный логин или пароль");
     }

@@ -6,9 +6,17 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { API_URL } from "../../config";
 
-const sizeOptions = [
-  "A00", "A0", "A1", "A1L", "A2", "A2L", "A2H", "A3", "A3L", "A3H", "A4", "A5"
-];
+type ProductType = {
+  _id: string;
+  name: string;
+  category: string;
+  price: number;
+  description?: string;
+  features?: string[];
+  images: string[];
+};
+
+const sizeOptions = ["A0", "A1", "A1L", "A2", "A2L", "A3"];
 
 const sizeTableData = [
   { size: "A0", height: "152 - 165", weight: "45.4 - 63.5" },
@@ -23,7 +31,7 @@ const sizeTableData = [
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<ProductType | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
 
@@ -55,9 +63,9 @@ const Product: React.FC = () => {
 
   const galleryImages = Array.isArray(product.images)
     ? product.images.map((img: string) => ({
-      original: `${API_URL}/images/${img}`,
-      thumbnail: `${API_URL}/images/${img}`,
-    }))
+        original: `${API_URL}/images/${img}`,
+        thumbnail: `${API_URL}/images/${img}`,
+      }))
     : [];
 
   const handleSizeSelect = (size: string) => {
@@ -76,7 +84,9 @@ const Product: React.FC = () => {
       alert("Пожалуйста, выберите размер");
       return;
     }
-    alert(`Добавлено в корзину: ${product.name}, размер: ${selectedSize}, количество: ${quantity}`);
+    alert(
+      `Добавлено в корзину: ${product.name}, размер: ${selectedSize}, количество: ${quantity}`
+    );
   };
 
   return (
@@ -108,7 +118,9 @@ const Product: React.FC = () => {
                 {product.category || "Категория не указана"}
               </span>
               <span className={styles.price}>
-                {product.price ? `${product.price.toLocaleString()} ₽` : "Цена не указана"}
+                {product.price
+                  ? `${product.price.toLocaleString()} ₽`
+                  : "Цена не указана"}
               </span>
             </div>
 
@@ -118,7 +130,7 @@ const Product: React.FC = () => {
                 {sizeOptions.map((size) => (
                   <button
                     key={size}
-                    className={`${styles.sizeButton} ${selectedSize === size ? styles.selected : ''}`}
+                    className={`${styles.sizeButton} ${selectedSize === size ? styles.selected : ""}`}
                     onClick={() => handleSizeSelect(size)}
                   >
                     {size}
@@ -128,7 +140,9 @@ const Product: React.FC = () => {
             </div>
 
             <div className={styles.quantitySection}>
-              <label htmlFor="quantity" className={styles.quantityLabel}>Количество:</label>
+              <label htmlFor="quantity" className={styles.quantityLabel}>
+                Количество:
+              </label>
               <input
                 type="number"
                 id="quantity"
@@ -145,29 +159,91 @@ const Product: React.FC = () => {
             >
               ДОБАВИТЬ В КОРЗИНУ
             </button>
-              <Col lg={12}>
-                <div className={styles.descriptionSection}>
-                  <h2 className={styles.sectionTitle}>Описание</h2>
-                  <p className={styles.descriptionText}>
-                    {product.description || "Описание отсутствует"}
+            <Col lg={12}>
+              <div className={styles.descriptionSection}>
+                <h2 className={styles.sectionTitle}>Описание</h2>
+                <div className={styles.descriptionText}>
+                  <h3>⚔️ S U B M I S S I O N — WARRIOR EDITION ⚔️</h3>
+                  <p>
+                    <strong>
+                      Оригинальное кимоно Submission из новой коллекции WARRIOR
+                      EDITION
+                    </strong>
+                    — это идеальное сочетание стиля, качества и
+                    функциональности, созданное для настоящих бойцов.
                   </p>
 
-                  {Array.isArray(product.features) && product.features.length > 0 && (
+                  <h3>Преимущества:</h3>
+                  <ul>
+                    <li>
+                      ✅ Соответствует стандартам <strong>IBJJF</strong>,
+                      <strong>UAEJJ</strong> и <strong>ACBJJ</strong>
+                    </li>
+                    <li>
+                      ✅ Прошло предварительную усадку — не теряет форму после
+                      стирки
+                    </li>
+                    <li>
+                      ✅ Изготовлено из
+                      <strong>100% премиального хлопка</strong>
+                    </li>
+                    <li>
+                      ✅ Усиленные швы в ключевых зонах для максимальной
+                      прочности
+                    </li>
+                    <li>
+                      ✅ Все логотипы выполнены в виде <strong>вышивки</strong>{" "}
+                      — долговечно и эстетично
+                    </li>
+                  </ul>
+
+                  <h3>Характеристики:</h3>
+                  <ul>
+                    <li>
+                      <strong>Материал:</strong> 100% хлопок
+                    </li>
+                    <li>
+                      <strong>Плотность ткани:</strong> 450 г/м²
+                    </li>
+                    <li>
+                      <strong>Штаны:</strong> Твил — прочная и износостойкая
+                      ткань
+                    </li>
+                  </ul>
+
+                  <p>
+                    <strong>Доступные размеры:</strong> A0, A1, A1L, A2, A2L, A3
+                  </p>
+
+                  <p>
+                    <em>
+                      Будь готов к бою — выбери кимоно, которое подчеркивает
+                      твой боевой дух.
+                    </em>
+                  </p>
+                  <p>
+                    <strong>SUBMISSION — экипировка победителей.</strong>
+                  </p>
+                </div>
+
+                {Array.isArray(product.features) &&
+                  product.features.length > 0 && (
                     <ul className={styles.featuresList}>
-                      {product.features.map((feature: string, index: number) => (
-                        <li key={index} className={styles.featureItem}>
-                          <span className={styles.featureIcon}>✓</span>
-                          {feature}
-                        </li>
-                      ))}
+                      {product.features.map(
+                        (feature: string, index: number) => (
+                          <li key={index} className={styles.featureItem}>
+                            <span className={styles.featureIcon}>✓</span>
+                            {feature}
+                          </li>
+                        )
+                      )}
                     </ul>
                   )}
-                </div>
-              </Col>
+              </div>
+            </Col>
           </div>
         </Col>
       </Row>
-
 
       <Row>
         <Col lg={12}>
