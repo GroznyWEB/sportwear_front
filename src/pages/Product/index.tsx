@@ -5,6 +5,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { API_URL } from "../../config";
+import { useProducts } from "../../components/context/ProductsContext";
+import useNotification from "../../hooks/useNotification";
 
 const sizeOptions = [
   "A00", "A0", "A1", "A1L", "A2", "A2L", "A2H", "A3", "A3L", "A3H", "A4", "A5"
@@ -23,31 +25,80 @@ const sizeTableData = [
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [product, setProduct] = useState<any>(null);
+  const { products } = useProducts();
+  const product = products.find((p) => p._id === id);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const { showNotification, NotificationComponent } = useNotification();
 
+
+  // Добавляем состояния для корзины и избранного
+  const [cart, setCart] = useState<any[]>([]);
+  const [favorites, setFavorites] = useState<any[]>([]);
+
+  // Загружаем данные из localStorage при монтировании
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/product/${id}`);
-        if (!response.ok) {
-          throw new Error(`Ошибка: ${response.statusText}`);
-        }
-        const data = await response.json();
-        if (data) {
-          console.log("Продукт загружен:", data);
-          setProduct(data);
-        } else {
-          throw new Error("Продукт не найден");
-        }
-      } catch (error) {
-        console.error("Ошибка при загрузке продукта:", error);
-        alert("Не удалось загрузить данные о продукте");
-      }
+    const savedCart = localStorage.getItem('cart');
+    const savedFavorites = localStorage.getItem('favorites');
+
+    if (savedCart) setCart(JSON.parse(savedCart));
+    if (savedFavorites) setFavorites(JSON.parse(savedFavorites));
+  }, []);
+
+  // Функция добавления в корзину
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      showNotification('Пожалуйста, выберите размер', { type: 'error' });
+      return;
+    }
+
+    const newItem = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      size: selectedSize,
+      quantity,
+      image: product.images[0] || ''
     };
-    fetchProduct();
-  }, [id]);
+
+    const updatedCart = [...cart, newItem];
+    setCart(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    showNotification(
+      `Добавлено в корзину: ${product.name}, размер: ${selectedSize}, количество: ${quantity}`,
+      { type: 'success' }
+    );
+  };
+
+  // Функция добавления в избранное
+  const handleAddToFavorite = () => {
+    const newFavorite = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0] || ''
+    };
+
+    // Проверяем, не добавлен ли уже товар в избранное
+    const isAlreadyFavorite = favorites.some(item => item.id === product._id);
+
+    if (isAlreadyFavorite) {
+      const updatedFavorites = favorites.filter(item => item.id !== product._id);
+      setFavorites(updatedFavorites);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    } else {
+      const updatedFavorites = [...favorites, newFavorite];
+      setFavorites(updatedFavorites);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    }
+    showNotification(
+      isAlreadyFavorite
+        ? 'Товар удален из избранного'
+        : 'Добавлено в избранное',
+      { type: isAlreadyFavorite ? 'info' : 'success' }
+    );
+  };
 
   if (!product) {
     return <div className={styles.notFound}>Продукт не найден</div>;
@@ -71,16 +122,10 @@ const Product: React.FC = () => {
     }
   };
 
-  const handleAddToCart = () => {
-    if (!selectedSize) {
-      alert("Пожалуйста, выберите размер");
-      return;
-    }
-    alert(`Добавлено в корзину: ${product.name}, размер: ${selectedSize}, количество: ${quantity}`);
-  };
-
   return (
     <Container className={styles.container}>
+      <NotificationComponent/>
+
       <h1 className={styles.productTitle}>{product.name || "Без названия"}</h1>
 
       <Row className={styles.productRow}>
@@ -139,31 +184,44 @@ const Product: React.FC = () => {
               />
             </div>
 
-            <button
-              className={styles.addToCartButton}
-              onClick={handleAddToCart}
-            >
-              ДОБАВИТЬ В КОРЗИНУ
-            </button>
-              <Col lg={12}>
-                <div className={styles.descriptionSection}>
-                  <h2 className={styles.sectionTitle}>Описание</h2>
-                  <p className={styles.descriptionText}>
-                    {product.description || "Описание отсутствует"}
-                  </p>
+            <div className={styles.buttons}>
+              <button
+                onClick={handleAddToCart}
+                className={styles.cartButton}
+              >
+                ДОБАВИТЬ В КОРЗИНУ
+              </button>
+              <button
+                onClick={handleAddToFavorite}
+                className={`${styles.favoriteButton} ${favorites.some(item => item.id === product._id) ? styles.favorited : ''
+                  }`}
+              >
+                {favorites.some(item => item.id === product._id)
+                  ? 'В ИЗБРАННОМ'
+                  : 'ДОБАВИТЬ В ИЗБРАННОЕ'}
+              </button>
+            </div>
 
-                  {Array.isArray(product.features) && product.features.length > 0 && (
-                    <ul className={styles.featuresList}>
-                      {product.features.map((feature: string, index: number) => (
-                        <li key={index} className={styles.featureItem}>
-                          <span className={styles.featureIcon}>✓</span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </Col>
+
+            <Col lg={12}>
+              <div className={styles.descriptionSection}>
+                <h2 className={styles.sectionTitle}>Описание</h2>
+                <p className={styles.descriptionText}>
+                  {product.description || "Описание отсутствует"}
+                </p>
+
+                {Array.isArray(product.features) && product.features.length > 0 && (
+                  <ul className={styles.featuresList}>
+                    {product.features.map((feature: string, index: number) => (
+                      <li key={index} className={styles.featureItem}>
+                        <span className={styles.featureIcon}>✓</span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </Col>
           </div>
         </Col>
       </Row>

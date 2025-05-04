@@ -12,6 +12,7 @@ import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
 import { LuHandshake } from "react-icons/lu";
 import { API_URL } from "../../config";
+import { useProducts } from "../context/ProductsContext";
 
 const sortOptions = [
   { key: "asc", label: "По возрастанию цены" },
@@ -19,27 +20,10 @@ const sortOptions = [
 ];
 
 const Catalog: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const { products, loading, error } = useProducts();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState<string>("asc");
-  const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(`${API_URL}/product`); // замени на свой путь
-        const data = await response.json();
-        console.log('Что пришло с бэка:', data);
-        setProducts(data);
-      } catch (error) {
-        console.error("Ошибка при загрузке товаров:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, []);
 
   const categories = Array.from(new Set(products.map((product) => product.category)));
 
