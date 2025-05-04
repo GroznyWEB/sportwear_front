@@ -8,15 +8,15 @@ interface Props {
 
 const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
   const gearImages = [
-    { src: `${API_URL}/images/red-other1.webp`, alt: "Боксерские перчатки" },
-    { src: `${API_URL}/images/sub-red8.webp`, alt: "Шорты для ММА" },
-    { src: `${API_URL}/images/sub-yellow2.webp`, alt: "Защита для тренировок" },
+    { src: `${API_URL}/images/red-other1.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-red8.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-yellow2.webp`, alt: "Кимоно для БЖЖ" },
   ];
 
   const clothingImages = [
-    { src: `${API_URL}/images/red-other8.webp`, alt: "Футболка тренировочная" },
-    { src: `${API_URL}/images/sub-white11.webp`, alt: "Штаны для единоборств" },
-    { src: `${API_URL}/images/sub-yellow6.webp`, alt: "Толстовка с логотипом" },
+    { src: `${API_URL}/images/red-other8.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-white11.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-yellow6.webp`, alt: "Кимоно для БЖЖ" },
   ];
 
   const [currentGearIndex, setCurrentGearIndex] = useState(0);

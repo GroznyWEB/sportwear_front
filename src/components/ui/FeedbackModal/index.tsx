@@ -41,7 +41,7 @@ const FeedbackModal: React.FC = () => {
           <p className="mb-4">
             Оставьте заявку на консультацию или звоните нам по номеру телефона{" "}
             <br />
-            <strong>+7(000) 000-00-00</strong>
+            <strong>+7(964)060-99-99 </strong>
           </p>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">

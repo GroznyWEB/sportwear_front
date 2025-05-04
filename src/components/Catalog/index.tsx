@@ -5,13 +5,21 @@ import styles from "./Catalog.module.scss";
 import { Container } from "react-bootstrap";
 import FeedbackModal from "../ui/FeedbackModal";
 import ProductCard from "../ProductCard";
-import { CiDeliveryTruck } from "react-icons/ci";
-import { GrCertificate } from "react-icons/gr";
 import { TbCertificate, TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
 import { MdOutlinePayment } from "react-icons/md";
 import { LuHandshake } from "react-icons/lu";
 import { API_URL } from "../../config";
+
+interface Product {
+  _id: string;
+  name: string;
+  description: string;
+  brand: string;
+  price: number;
+  images: string[];
+  category: string;
+}
 
 const sortOptions = [
   { key: "asc", label: "По возрастанию цены" },
@@ -19,7 +27,7 @@ const sortOptions = [
 ];
 
 const Catalog: React.FC = () => {
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [sortOption, setSortOption] = useState<string>("asc");
   const [loading, setLoading] = useState<boolean>(true);

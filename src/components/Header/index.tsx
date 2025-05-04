@@ -14,18 +14,18 @@ import { IoListCircleOutline } from "react-icons/io5";
 import FavOffcanvas from "../ui/Favorites";
 
 const Header = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [showFav, setShowFav] = useState(false);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showCart, setShowCart] = useState<boolean>(false);
+  const [showFav, setShowFav] = useState<boolean>(false);
 
-  const [cartCount, setCartCount] = useState(0);
-  const [shrink, setShrink] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [cartCount, setCartCount] = useState<number>(0);
+  const [shrink, setShrink] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = (): void => {
       setIsMobile(window.innerWidth <= 768);
     };
     handleResize();
@@ -54,12 +54,8 @@ const Header = () => {
 
           <div className={styles.leftNavbar}>
             <Link to="/catalog" className={styles.catalog}> Каталог</Link>
-            <Link to="/castomers" className={styles.forCastomers}>
-              Покупателям
-            </Link>
-            <Link to="/contacts" className={styles.media}>
-              Контакты
-            </Link>
+            <Link to="/castomers" className={styles.forCastomers}>Покупателям </Link>
+            <Link to="/contacts" className={styles.media}>Контакты</Link>
           </div>
         )}
 

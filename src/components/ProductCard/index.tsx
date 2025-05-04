@@ -6,7 +6,7 @@ import styles from "./ProductCard.module.scss";
 interface ProductCardProps {
   product: {
     images: string[];
-    id: number;
+    id: string;
     name: string;
     description: string;
     brand: string;
