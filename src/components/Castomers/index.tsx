@@ -3,7 +3,12 @@ import styles from "./Castomers.module.scss";
 import { FaPlus } from "react-icons/fa6";
 import { IoCloseSharp } from "react-icons/io5";
 
-const data = [
+type InfoItem = {
+    title: string;
+    content: string[];
+};
+
+const data: InfoItem[] = [
   {
     title: "Доставка",
     content: [

@@ -1,12 +1,17 @@
-import React from 'react';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaShoppingBag } from 'react-icons/fa';
-import styles from './Contacts.module.scss';
+import React from "react";
+import {
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaShoppingBag,
+} from "react-icons/fa";
+import styles from "./Contacts.module.scss";
 
 const Contacts: React.FC = () => {
   return (
     <div className={styles.contactsContainer}>
       <h1 className={styles.title}>Контакты</h1>
-      
+
       <div className={styles.cardsGrid}>
         <div className={styles.contactCard}>
           <div className={styles.iconWrapper}>
@@ -14,11 +19,17 @@ const Contacts: React.FC = () => {
           </div>
           <h3 className={styles.cardTitle}>Связаться</h3>
           <p className={styles.contactInfo}>
-            <a href="tel:+79640609999" className={styles.contactLink}>+7 (964) 060-99-99</a>
+            <a href="tel:+79640609999" className={styles.contactLink}>
+              +7 (964) 060-99-99
+            </a>
           </p>
           <p className={styles.contactInfo}>
-            <a href="mailto:halid.esanukaev.86@mail.ru" className={styles.contactLink}>
-              <FaEnvelope className={styles.smallIcon} /> halid.esanukaev.86@mail.ru
+            <a
+              href="mailto:halid.esanukaev.86@mail.ru"
+              className={styles.contactLink}
+            >
+              <FaEnvelope className={styles.smallIcon} />{" "}
+              halid.esanukaev.86@mail.ru
             </a>
           </p>
         </div>
@@ -29,10 +40,10 @@ const Contacts: React.FC = () => {
           </div>
           <h3 className={styles.cardTitle}>Маркетплейсы</h3>
           <p className={styles.contactInfo}>
-            <a 
-              href="https://wildberries.ru" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://wildberries.ru"
+              target="_blank"
+              rel="noopener noreferrer"
               className={styles.contactLink}
             >
               Wildberries

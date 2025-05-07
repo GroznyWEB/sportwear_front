@@ -1,16 +1,48 @@
-
 export const handlePhoneChange = (
   e: React.ChangeEvent<HTMLInputElement>,
   setPhone: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  let value = e.target.value.replace(/\D/g, "");
-  if (value.startsWith("7")) {
-    value = value.slice(1); 
+  const input = e.target;
+  const cursorPosition = input.selectionStart || 0;
+  let value = input.value;
+  
+  // Сохраняем только цифры
+  const numbers = value.replace(/\D/g, '');
+  
+  // Форматируем номер
+  let formattedValue = '+7';
+  
+  if (numbers.length > 1) {
+    formattedValue += ` (${numbers.substring(1, 4)}`;
   }
-  
-  value = value.slice(0, 10); 
+  if (numbers.length >= 4) {
+    formattedValue += `) ${numbers.substring(4, 7)}`;
+  }
+  if (numbers.length >= 7) {
+    formattedValue += `-${numbers.substring(7, 9)}`;
+  }
+  if (numbers.length >= 9) {
+    formattedValue += `-${numbers.substring(9, 11)}`;
+  }
 
-  const formattedPhone = `+7 (${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 8)}-${value.slice(8, 10)}`;
-  
-  setPhone(formattedPhone); 
+  setPhone(formattedValue);
+
+  // Корректируем позицию курсора
+  setTimeout(() => {
+    let newCursorPosition = cursorPosition;
+    
+    // Если удаляем символ перед разделителем
+    if (value.length > formattedValue.length && 
+        [' ', ')', '-', '('].includes(value[cursorPosition - 1])) {
+      newCursorPosition--;
+    }
+    
+    // Если добавляем символ перед разделителем
+    if (value.length < formattedValue.length && 
+        [' ', ')', '-', '('].includes(formattedValue[cursorPosition])) {
+      newCursorPosition++;
+    }
+    
+    input.setSelectionRange(newCursorPosition, newCursorPosition);
+  }, 0);
 };

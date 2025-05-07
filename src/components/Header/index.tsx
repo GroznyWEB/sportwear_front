@@ -1,69 +1,79 @@
-import { useState, useEffect } from "react";
-import { Container, Button, Offcanvas, ListGroupItem } from "react-bootstrap";
+import { useState, useEffect, useCallback } from "react";
+import { Container, Offcanvas } from "react-bootstrap";
 import styles from "../Header/Header.module.scss";
-import LoginModal from "../ui/ModalAuth";
+// import LoginModal from "../ui/ModalAuth";
 import CartOffcanvas from "../ui/CanvasCart";
 import { Link } from "react-router-dom";
 import { FiMenu, FiShoppingCart } from "react-icons/fi";
-import { PiShoppingCartSimpleThin } from "react-icons/pi";
 import { MdFavorite } from "react-icons/md";
 import { FaRegRectangleList, FaWhatsapp } from "react-icons/fa6";
-import { BsBoxArrowInRight, BsFillGeoAltFill, BsPersonCircle } from "react-icons/bs";
+import {
+  BsFillGeoAltFill,
+  BsPersonCircle,
+} from "react-icons/bs";
 import { BiShoppingBag } from "react-icons/bi";
-import { IoListCircleOutline } from "react-icons/io5";
 import FavOffcanvas from "../ui/Favorites";
 
 const Header = () => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [showFav, setShowFav] = useState(false);
+  // const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  // const [showModal, setShowModal] = useState<boolean>(false);
+  const [showCart, setShowCart] = useState<boolean>(false);
+  const [showFav, setShowFav] = useState<boolean>(false);
 
-  const [cartCount, setCartCount] = useState(0);
-  const [shrink, setShrink] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  // const [cartCount, setCartCount] = useState<number>(0);
+  const [shrink, setShrink] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+
+  // Оптимизированный обработчик скролла
+  const handleScroll = useCallback(() => {
+    const shouldShrink = window.scrollY > 50;
+    setShrink((prev) => (prev !== shouldShrink ? shouldShrink : prev));
+  }, []);
+
+  // Оптимизированный обработчик ресайза
+  const handleResize = useCallback(() => {
+    const mobile = window.innerWidth <= 768;
+    setIsMobile((prev) => (prev !== mobile ? mobile : prev));
+  }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [handleResize]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShrink(window.scrollY > 50);
-    };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   return (
     <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
       <Container className={styles.container}>
         {isMobile && (
-          <div className={styles.burgerMenu} onClick={() => setShowMobileMenu(true)}>
+          <div
+            className={styles.burgerMenu}
+            onClick={() => setShowMobileMenu(true)}
+          >
             <FiMenu size={24} />
           </div>
         )}
 
         {!isMobile && (
-
           <div className={styles.leftNavbar}>
-            <Link to="/catalog" className={styles.catalog}> Каталог</Link>
+            <Link to="/catalog" className={styles.catalog}>
+              {" "}
+              Каталог
+            </Link>
             <Link to="/castomers" className={styles.forCastomers}>
-              Покупателям
+              Покупателям{" "}
             </Link>
             <Link to="/contacts" className={styles.media}>
               Контакты
             </Link>
           </div>
         )}
-
-
 
         <div className={styles.logo}>
           <Link to="/">
@@ -77,7 +87,9 @@ const Header = () => {
 
         {isMobile ? (
           <div className={styles.rightNavbar}>
-            <div><MdFavorite onClick={() => setShowFav(true)} size={20} /> </div>
+            <div>
+              <MdFavorite onClick={() => setShowFav(true)} size={20} />{" "}
+            </div>
             <div
               className={styles.cartIconWrapper}
               onClick={() => setShowCart(true)}
@@ -93,8 +105,7 @@ const Header = () => {
         ) : (
           <div className={styles.rightNavbar}>
             <div className={styles.media}>WhatsApp</div>
-            <div onClick={() => setShowFav(true)}
-            >Избранное</div>
+            <div onClick={() => setShowFav(true)}>Избранное</div>
             <div
               className={styles.cartIconWrapper}
               onClick={() => setShowCart(true)}
@@ -108,7 +119,6 @@ const Header = () => {
             )} */}
           </div>
         )}
-
       </Container>
 
       {/* Мобильное меню (Offcanvas) */}
@@ -119,9 +129,14 @@ const Header = () => {
         className={styles.mobileMenu}
         backdropClassName={styles.menuBackdrop}
       >
-        <Offcanvas.Header closeButton closeVariant="white" className={styles.menuHeader}>
+        <Offcanvas.Header
+          closeButton
+          closeVariant="white"
+          className={styles.menuHeader}
+        >
           <Offcanvas.Title className={styles.menuTitle}>
-            <BiShoppingBag size={24} className="me-2" /> {/* Иконка из react-icons */}
+            <BiShoppingBag size={24} className="me-2" />{" "}
+            {/* Иконка из react-icons */}
             Меню
           </Offcanvas.Title>
         </Offcanvas.Header>
@@ -180,14 +195,13 @@ const Header = () => {
         </Offcanvas.Body>
       </Offcanvas>
 
-      <LoginModal
+      {/* <LoginModal
         show={showModal}
         handleClose={() => setShowModal(false)}
         handleLoginSuccess={() => setIsAdmin(true)}
-      />
+      /> */}
       <CartOffcanvas show={showCart} handleClose={() => setShowCart(false)} />
       <FavOffcanvas show={showFav} handleClose={() => setShowFav(false)} />
-
     </header>
   );
 };

@@ -8,15 +8,15 @@ interface Props {
 
 const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
   const gearImages = [
-    { src: `${API_URL}/images/red-other1.webp`, alt: "Боксерские перчатки" },
-    { src: `${API_URL}/images/sub-red8.webp`, alt: "Шорты для ММА" },
-    { src: `${API_URL}/images/sub-yellow2.webp`, alt: "Защита для тренировок" },
+    { src: `${API_URL}/images/red-other1.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-red8.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-yellow2.webp`, alt: "Кимоно для БЖЖ" },
   ];
 
   const clothingImages = [
-    { src: `${API_URL}/images/red-other8.webp`, alt: "Футболка тренировочная" },
-    { src: `${API_URL}/images/sub-white11.webp`, alt: "Штаны для единоборств" },
-    { src: `${API_URL}/images/sub-yellow6.webp`, alt: "Толстовка с логотипом" },
+    { src: `${API_URL}/images/red-other8.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-white11.webp`, alt: "Кимоно для БЖЖ" },
+    { src: `${API_URL}/images/sub-yellow6.webp`, alt: "Кимоно для БЖЖ" },
   ];
 
   const [currentGearIndex, setCurrentGearIndex] = useState(0);
@@ -48,10 +48,10 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
 
   useEffect(() => {
     const gearInterval = setInterval(() => nextSlide("gear"), 5000);
-    const clothingInterval = isMobile 
-      ? null 
+    const clothingInterval = isMobile
+      ? null
       : setInterval(() => nextSlide("clothing"), 5000);
-    
+
     return () => {
       clearInterval(gearInterval);
       if (clothingInterval) clearInterval(clothingInterval);
@@ -62,10 +62,10 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
     <div className="custom-carousel-container">
       <div className="promo-banner">
         <h1>Бренд экипировки и одежда для единоборств</h1>
-        <p>
+        {/* <p>
           10% скидка на весь асортимент товаров при вводе промокода «SALE10» в
           корзине
-        </p>
+        </p> */}
         <button className="catalog-link" onClick={scrollToCatalog}>
           КАТАЛОГ ТОВАРОВ →
         </button>
@@ -85,7 +85,9 @@ const CustomDoubleCarousel: React.FC<Props> = ({ scrollToCatalog }) => {
         {/* Показываем вторую карусель только на десктопе */}
         {!isMobile && (
           <div className="carousel-column">
-            <div className={`carousel-slide ${animate ? "fade-out" : "fade-in"}`}>
+            <div
+              className={`carousel-slide ${animate ? "fade-out" : "fade-in"}`}
+            >
               <img
                 src={clothingImages[currentClothingIndex].src}
                 alt={clothingImages[currentClothingIndex].alt}

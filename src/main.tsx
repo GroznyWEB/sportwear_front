@@ -1,18 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from 'react-router-dom';
-import './styles/main.scss';
-import { ProductsProvider } from './components/context/ProductsContext.tsx';
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import App from "./App.tsx";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
+import "./styles/main.scss";
+import { AppProvider } from "./components/context/AppContext.tsx";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
-      <ProductsProvider>
+      <AppProvider>
         <App />
-      </ProductsProvider>
+      </AppProvider>
     </BrowserRouter>
-  </StrictMode>,
-)
+);

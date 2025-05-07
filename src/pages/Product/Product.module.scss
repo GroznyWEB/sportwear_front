@@ -1,6 +1,6 @@
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
 
 .container {
   margin-top: 120px !important;
@@ -105,7 +105,7 @@
   padding-bottom: 8px;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -200,8 +200,12 @@
   }
 
   &:disabled {
-    background: #ccc;
+    opacity: 0.5;
     cursor: not-allowed;
+
+    &:hover {
+      background: #333;
+    }
   }
 }
 
@@ -253,7 +257,6 @@
   border-collapse: collapse;
   margin-top: 15px;
 
-
   th,
   td {
     padding: 12px 15px;
@@ -261,7 +264,6 @@
     border-bottom: 1px solid #f3f3f3d1;
     cursor: pointer;
     font-weight: 700;
-
   }
 
   th {
@@ -325,7 +327,6 @@
   }
 
   .sizeTable {
-
     th,
     td {
       padding: 8px 10px;

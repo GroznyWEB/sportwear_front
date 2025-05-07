@@ -1,112 +1,282 @@
 .reservBlock {
-    padding: 60px 20px;
-    padding-top: 150px;
+  padding: 60px 20px;
+  padding-top: 150px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding-top: 100px;
+    padding-bottom: 40px;
   }
-  
-  .choose {
-    text-align: center;
-    font-weight: bold;
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  
-  .info {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-  
-  .form {
-    width: 45%;
-    display: flex;
+}
+
+.choose {
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: var(--color);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 30px;
+
+  @media (max-width: 768px) {
     flex-direction: column;
     gap: 20px;
-  
-    input {
-      padding: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
+  }
+}
+
+.form {
+  width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+
+  input {
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+
+    &:focus {
+      outline: none;
+      border-color: #d94040;
     }
-  
-    button {
-      padding: 20px;
-      font-size: 18px;
-      color: #737373;
-      font-weight: bold;
-      border: 1px solid #282727;
-      border-radius: 8px;
-      cursor: pointer;
+  }
+
+  button {
+    padding: 20px;
+    font-size: 18px;
+    color: #737373;
+    font-weight: bold;
+    border: 1px solid #282727;
+    border-radius: 8px;
+    cursor: pointer;
+    background: white;
+    transition: all 0.3s;
+
+    &:hover {
+      color: #d94040;
+      border-color: #d94040;
+      transform: translateY(-2px);
     }
 
-    button:hover {
-        color: #d94040; // красный текст
-        border-color: #d94040; // красный бордер
-      }
+    &:active {
+      transform: translateY(0);
+    }
   }
-  
-  .product {
-    width: 50%;
-  
-    .details {
+}
+
+.products {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.emptyCart {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 16px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+}
+
+.product {
+  transition: box-shadow 0.3s;
+  color: var(--color);
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+
+    @media (max-width: 480px) {
+      width: 60px;
+      height: 80px;
+    }
+  }
+
+  .text {
+    flex-grow: 1;
+    min-width: 120px;
+
+    h4 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--color);
+    }
+
+    p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: var(--color);
+    }
+  }
+
+  .quantity {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 10px;
+
+    button {
+      border: 1px solid #ccc;
+      background: none;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      font-weight: bold;
+      cursor: pointer;
+      color: var(--color);
       display: flex;
       align-items: center;
-      gap: 20px;
-  
-      img {
-        width: 80px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 8px;
-      }
-  
-      .text {
-        flex-grow: 1;
-  
-        h4 {
-          margin: 0;
-        }
-  
-        p {
-          margin: 5px 0;
-          font-size: 14px;
-        }
-      }
-  
-      .quantity {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-  
-        button {
-          border: 1px solid #ccc;
-          background: none;
-          border-radius: 50%;
-          width: 25px;
-          height: 25px;
-          font-weight: bold;
-          cursor: pointer;
-          color: #737373;
+      justify-content: center;
+      transition: all 0.2s;
 
-        }
+      &:hover {
+        background: #f5f5f5;
       }
-  
-      .price {
-        font-weight: bold;
-      }
-  
-      .remove {
-        cursor: pointer;
-        font-size: 20px;
-        color: #888;
+
+      &:active {
+        transform: scale(0.9);
       }
     }
-  
-    .total {
-      text-align: right;
-      margin-top: 20px;
-      font-size: 16px;
-      font-weight: bold;
+
+    span {
+      min-width: 20px;
+      text-align: center;
     }
   }
-  
+
+  .price {
+    font-weight: bold;
+    color: var(--color);
+    min-width: 80px;
+    text-align: right;
+  }
+
+  .remove {
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--color);
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+
+    &:hover {
+      color: #d94040;
+      transform: scale(1.1);
+    }
+  }
+}
+
+.total {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  color: #333;
+}
+
+.phoneInput {
+  position: relative;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+    border-color: #d94040;
+    box-shadow: 0 0 0 2px rgba(217, 64, 64, 0.2);
+  }
+
+  &::placeholder {
+    color: #999;
+  }
+
+  /* Для браузеров, которые поддерживают :-webkit-autofill */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: #333;
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
+}
+
+.orderSuccess {
+  text-align: center;
+  padding: 40px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+
+  h2 {
+    color: #28a745;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+}
+
+.submitError {
+  color: #dc3545;
+  padding: 10px;
+  margin-bottom: 15px;
+  background-color: #f8d7da;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+}
+
+button:disabled {
+  background-color: #cccccc !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
