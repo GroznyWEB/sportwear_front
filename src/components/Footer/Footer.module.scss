@@ -24,3 +24,38 @@
 .logo img {
     width: 130px;
 }
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    text-decoration: none;
+  }
+  
+  .whatsApp a {
+    color: inherit;
+    text-decoration: none;
+  
+    &:hover {
+      color: #25D366; // зелёный
+    }
+  }
+  
+  .telegram a {
+    color: inherit;
+    text-decoration: none;
+  
+    &:hover {
+      color: #0088cc; // синий (Telegram)
+    }
+  }
+  
+  .instagram a {
+    color: inherit;
+    text-decoration: none;
+  
+    &:hover {
+      color: #b22db6; // фиолетовый
+    }
+  }
+  

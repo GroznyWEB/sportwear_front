@@ -7,10 +7,7 @@ import { Link } from "react-router-dom";
 import { FiMenu, FiShoppingCart } from "react-icons/fi";
 import { MdFavorite } from "react-icons/md";
 import { FaRegRectangleList, FaWhatsapp } from "react-icons/fa6";
-import {
-  BsFillGeoAltFill,
-  BsPersonCircle,
-} from "react-icons/bs";
+import { BsFillGeoAltFill, BsPersonCircle } from "react-icons/bs";
 import { BiShoppingBag } from "react-icons/bi";
 import FavOffcanvas from "../ui/Favorites";
 
@@ -104,7 +101,15 @@ const Header = () => {
           </div>
         ) : (
           <div className={styles.rightNavbar}>
-            <div className={styles.media}>WhatsApp</div>
+            <div className={styles.media}>
+              <a
+                href="https://wa.me/79640609999?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                WhatsApp
+              </a>
+            </div>
             <div onClick={() => setShowFav(true)}>Избранное</div>
             <div
               className={styles.cartIconWrapper}

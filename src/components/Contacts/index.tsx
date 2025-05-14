@@ -18,19 +18,9 @@ const Contacts: React.FC = () => {
             <FaPhone className={styles.icon} />
           </div>
           <h3 className={styles.cardTitle}>Связаться</h3>
+          <p className={styles.contactInfo}>+7 (964) 060-99-99</p>
           <p className={styles.contactInfo}>
-            <a href="tel:+79640609999" className={styles.contactLink}>
-              +7 (964) 060-99-99
-            </a>
-          </p>
-          <p className={styles.contactInfo}>
-            <a
-              href="mailto:halid.esanukaev.86@mail.ru"
-              className={styles.contactLink}
-            >
-              <FaEnvelope className={styles.smallIcon} />{" "}
-              halid.esanukaev.86@mail.ru
-            </a>
+            <FaEnvelope className={styles.smallIcon} /> Qatarhab@mail.ru
           </p>
         </div>
 
@@ -39,16 +29,7 @@ const Contacts: React.FC = () => {
             <FaShoppingBag className={styles.icon} />
           </div>
           <h3 className={styles.cardTitle}>Маркетплейсы</h3>
-          <p className={styles.contactInfo}>
-            <a
-              href="https://wildberries.ru"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.contactLink}
-            >
-              Wildberries
-            </a>
-          </p>
+          <p className={styles.contactInfo}>Wildberries</p>
         </div>
 
         <div className={styles.contactCard}>
@@ -56,8 +37,9 @@ const Contacts: React.FC = () => {
             <FaMapMarkerAlt className={styles.icon} />
           </div>
           <h3 className={styles.cardTitle}>Адрес</h3>
-          <p className={styles.contactInfo}>Проспект,</p>
-          <p className={styles.contactInfo}>ТРЦ Грозный Молл</p>
+          <p className={styles.contactInfo}>г. Грозный,</p>
+          <p className={styles.contactInfo}>ТРЦ Гранд Парк</p>
+          <p className={styles.contactInfo}>2 этаж, магазин "Питбуль"</p>
         </div>
       </div>
 
