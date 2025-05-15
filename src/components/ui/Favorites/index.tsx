@@ -4,6 +4,7 @@ import styles from "./Favorites.module.scss";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
+import { API_URL } from "../../../config";
 
 const FavOffcanvas = ({ show, handleClose }: any) => {
   const { favorites, toggleFavorite } = useApp().favorites;
@@ -35,7 +36,7 @@ const FavOffcanvas = ({ show, handleClose }: any) => {
                   onClick={handleClose}
                 >
                   <img
-                    src={`http://localhost:4000/images/${item.image}`}
+                    src={`${API_URL}/images/${item.image}`}
                     alt={item.name}
                     className={styles.itemImage}
                   />
