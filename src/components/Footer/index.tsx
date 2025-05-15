@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
 
           <div className={styles.telegram}>
             <a
-              href="https://t.me/@anarhia13"
+              href="https://t.me/anarhia13"
               target="_blank"
               rel="noopener noreferrer"
             >
