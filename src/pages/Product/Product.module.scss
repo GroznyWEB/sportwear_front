@@ -41,6 +41,7 @@
   overscroll-behavior: contain;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+  position: relative;
   z-index: 1;
 
   .image-gallery {
