@@ -38,9 +38,13 @@ body {
 
 .image-gallery-content .image-gallery-slide .image-gallery-image {
     height: 40vh;
+    
   }
 
   .fullscreen .image-gallery-image {
-    height: calc(100vh - 80px)!important;
+    height: calc(100vh - 200px)!important;
+    margin-top: 50px;
+
   }
+
 }
