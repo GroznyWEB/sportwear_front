@@ -38,8 +38,18 @@
 
 .galleryWrapper {
   border-radius: 8px;
-  overflow: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 
+
+  .image-gallery {
+    height: 100%;
+    touch-action: none;
+    
+    &-content {
+      height: 100%;
+    }
+  }
   .customGallery {
     .image-gallery-slide-wrapper {
       border-radius: 8px 8px 0 0;
@@ -324,22 +334,5 @@
       padding: 8px 10px;
       font-size: 14px;
     }
-  }
-}
-.forceScroll {
-  touch-action: pan-y !important;
-  pointer-events: auto !important;
-
-  .image-gallery-slide-wrapper {
-    touch-action: pan-y !important;
-    overscroll-behavior: contain !important;
-  }
-
-  .image-gallery-slides {
-    touch-action: pan-y !important;
-  }
-
-  .image-gallery-content {
-    touch-action: pan-y !important;
   }
 }
