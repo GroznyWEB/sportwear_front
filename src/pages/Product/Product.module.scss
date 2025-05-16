@@ -37,20 +37,25 @@
 }
 
 .galleryWrapper {
-  overflow-y: auto !important; // Принудительно включаем прокрутку
-  overscroll-behavior: contain;
-  touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
-  z-index: 1;
+  border-radius: 8px;
+  overflow: hidden;
 
-  .image-gallery {
-    touch-action: none !important; // Полный запрет на touch-события
-    &-content, &-slide {
-      touch-action: none !important;
+  .customGallery {
+    .image-gallery-slide-wrapper {
+      border-radius: 8px 8px 0 0;
     }
 
+    .image-gallery-thumbnails-wrapper {
+      border-radius: 0 0 8px 8px;
+    }
 
+    .image-gallery-thumbnail {
+      border: none;
+
+      &.active {
+        border: 2px solid #d94040;
+      }
+    }
   }
 }
 

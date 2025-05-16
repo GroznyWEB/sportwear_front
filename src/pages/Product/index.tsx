@@ -87,18 +87,6 @@ const Product: React.FC = () => {
     );
   };
 
-  const handleTouchStart = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault(); // Блокируем стандартное поведение
-
-  };
-
-  const handleTouchMove = (e: any) => {
-    e.stopPropagation();
-    e.preventDefault(); // Блокируем стандартное поведение
-
-  };
-
   if (!product) {
     return <div className={styles.notFound}>Продукт не найден</div>;
   }
@@ -123,20 +111,15 @@ const Product: React.FC = () => {
         <Col lg={6} className={styles.galleryCol}>
           <div className={styles.galleryWrapper}>
             {galleryImages.length > 0 ? (
-              <div style={{ height: "auto", overflowY: "auto" }}>
-                <ImageGallery
-                  items={galleryImages}
-                  showPlayButton={false}
-                  showFullscreenButton={true}
-                  showNav={true}
-                  thumbnailPosition="bottom"
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  additionalClass={styles.customGallery}
-                  useBrowserFullscreen={false}
-                  disableSwipe={window.innerWidth < 768} // Отключаем свайп только на мобильных
-                />
-              </div>
+              <ImageGallery
+                items={galleryImages}
+                showPlayButton={false}
+                showFullscreenButton={true}
+                showNav={true}
+                thumbnailPosition="bottom"
+                additionalClass={styles.customGallery}
+                useBrowserFullscreen={false} 
+              />
             ) : (
               <div className={styles.noImages}>Изображения отсутствуют</div>
             )}
