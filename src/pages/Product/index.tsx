@@ -90,7 +90,7 @@ const Product: React.FC = () => {
   const handleTouchStart = (e: any) => {
     e.stopPropagation();
   };
-  
+
   const handleTouchMove = (e: any) => {
     e.stopPropagation();
   };
@@ -119,18 +119,20 @@ const Product: React.FC = () => {
         <Col lg={6} className={styles.galleryCol}>
           <div className={styles.galleryWrapper}>
             {galleryImages.length > 0 ? (
-              <ImageGallery
-              items={galleryImages}
-              showPlayButton={false}
-              showFullscreenButton={true}
-              showNav={true}
-              thumbnailPosition="bottom"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              additionalClass={styles.customGallery}
-              useBrowserFullscreen={false}
-              disableSwipe={window.innerWidth < 768} // Отключаем свайп только на мобильных
-              />
+              <div style={{ height: "60vh", overflowY: "auto" }}>
+                <ImageGallery
+                  items={galleryImages}
+                  showPlayButton={false}
+                  showFullscreenButton={true}
+                  showNav={true}
+                  thumbnailPosition="bottom"
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  additionalClass={styles.customGallery}
+                  useBrowserFullscreen={false}
+                  disableSwipe={window.innerWidth < 768} // Отключаем свайп только на мобильных
+                />
+              </div>
             ) : (
               <div className={styles.noImages}>Изображения отсутствуют</div>
             )}
