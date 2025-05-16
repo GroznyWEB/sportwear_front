@@ -118,6 +118,7 @@ const Product: React.FC = () => {
                 showNav={true}
                 thumbnailPosition="bottom"
                 additionalClass={styles.customGallery}
+                disableSwipe={true} // Отключает свайпы
                 useBrowserFullscreen={false} 
               />
             ) : (
