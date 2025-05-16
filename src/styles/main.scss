@@ -36,7 +36,11 @@ body {
 
 @media (max-width: 800px) {
 
-.image-gallery-content .image-gallery-slide .image-gallery-image {      height: 50vh!important;
-    height: 40vh!important;
+.image-gallery-content .image-gallery-slide .image-gallery-image {
+    height: 40vh;
+  }
+
+  .fullscreen .image-gallery-image {
+    height: calc(100vh - 80px)!important;
   }
 }
