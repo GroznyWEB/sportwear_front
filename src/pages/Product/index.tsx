@@ -117,7 +117,7 @@ const Product: React.FC = () => {
                 showFullscreenButton={true}
                 showNav={true}
                 thumbnailPosition="bottom"
-                additionalClass={styles.customGallery}
+                additionalClass={`${styles.customGallery} ${styles.forceScroll}`}
                 disableSwipe={true} // Отключает свайпы
                 useBrowserFullscreen={false} 
               />
