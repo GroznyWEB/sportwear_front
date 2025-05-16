@@ -38,33 +38,20 @@
 
 .galleryWrapper {
   border-radius: 8px;
-  overflow-y: auto;
   overscroll-behavior: contain;
-
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 
   .image-gallery {
     height: 100%;
-    touch-action: none;
     
     &-content {
       height: 100%;
+      touch-action: pan-y;
     }
-  }
-  .customGallery {
-    .image-gallery-slide-wrapper {
-      border-radius: 8px 8px 0 0;
-    }
-
-    .image-gallery-thumbnails-wrapper {
-      border-radius: 0 0 8px 8px;
-    }
-
-    .image-gallery-thumbnail {
-      border: none;
-
-      &.active {
-        border: 2px solid #d94040;
-      }
+    
+    &-slide {
+      touch-action: pan-y;
     }
   }
 }
