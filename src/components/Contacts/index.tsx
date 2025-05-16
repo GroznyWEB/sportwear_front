@@ -44,12 +44,7 @@ const Contacts: React.FC = () => {
       </div>
 
       <div className={styles.mapWrapper}>
-        <iframe
-          src="https://yandex.ru/map-widget/v1/?um=constructor%3A252a54a05cb72b94c3d8b88e7d558c57a8e51e0f4e4fa09360d4d23353b12f9b&amp;source=constructor"
-          className={styles.map}
-          title="Карта расположения"
-          allowFullScreen
-        />
+      <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A85466e42ee77f4edf9c00756120334a19c40d54c1030b14b64dd83317104046f&amp;source=constructor" width="100%" height="400"></iframe>
       </div>
     </div>
   );

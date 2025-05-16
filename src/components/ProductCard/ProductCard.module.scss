@@ -46,12 +46,14 @@
   z-index: 2; // Чтобы иконка была поверх изображения
   transition: all 0.3s ease;
 
-  &:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1);
+  @media (hover: hover) {
+    &:hover {
+      background: rgba(255, 255, 255, 1);
+      transform: scale(1.1);
 
-    .fav_icon {
-      fill: #db3306;
+      .fav_icon {
+        fill: #db3306;
+      }
     }
   }
 }

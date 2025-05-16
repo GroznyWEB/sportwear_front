@@ -18,10 +18,26 @@ const Header = () => {
   const [shrink, setShrink] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [visible, setVisible] = useState(true);
 
   const handleScroll = useCallback(() => {
-    setShrink(window.scrollY > 50);
-  }, []);
+    const currentScrollY = window.scrollY;
+    
+    // Уменьшаем шапку при прокрутке
+    setShrink(currentScrollY > 50);
+    
+    // Логика скрытия/показа шапки
+    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      // Скролл вниз и проскроллили больше 100px - скрываем
+      setVisible(false);
+    } else if (currentScrollY < lastScrollY) {
+      // Скролл вверх - показываем
+      setVisible(true);
+    }
+    
+    setLastScrollY(currentScrollY);
+  }, [lastScrollY]);
 
   const handleResize = useCallback(() => {
     setIsMobile(window.innerWidth <= 768);
@@ -39,7 +55,8 @@ const Header = () => {
   }, [handleScroll]);
 
   return (
-    <header className={`${styles.header} ${shrink ? styles.shrink : ""}`}>
+    <header 
+    className={`${styles.header} ${shrink ? styles.shrink : ""} ${!visible ? styles.hidden : ""}`}>
       <Container className={styles.container}>
         {isMobile && (
           <div
@@ -53,7 +70,7 @@ const Header = () => {
         {!isMobile && (
           <div className={styles.leftNavbar}>
             <Link to="/catalog" className={styles.catalog}>Каталог</Link>
-            <Link to="/castomers" className={styles.forCastomers}>Покупателям</Link>
+            <Link to="/customers" className={styles.forCastomers}>Покупателям</Link>
             <Link to="/contacts" className={styles.media}>Контакты</Link>
           </div>
         )}
@@ -133,7 +150,7 @@ const Header = () => {
             </Link>
 
             <Link
-              to="/castomers"
+              to="/customers"
               className={styles.navLink}
               onClick={() => setShowMobileMenu(false)}
             >

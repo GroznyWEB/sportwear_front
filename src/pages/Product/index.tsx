@@ -42,8 +42,6 @@ const Product: React.FC = () => {
 
   const isInCart = cart.cart.some((item) => item.id === product?._id);
 
-  console.log("quat", quantity);
-  // Добавляем состояния для корзины и избранного
   const { toggleFavorite, isFavorite } = favorites;
 
   // Функция добавления в корзину
@@ -120,6 +118,7 @@ const Product: React.FC = () => {
                 showNav={true}
                 thumbnailPosition="bottom"
                 additionalClass={styles.customGallery}
+                useBrowserFullscreen={false} 
               />
             ) : (
               <div className={styles.noImages}>Изображения отсутствуют</div>
