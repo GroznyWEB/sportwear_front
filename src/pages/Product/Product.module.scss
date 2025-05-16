@@ -37,21 +37,19 @@
 }
 
 .galleryWrapper {
-  border-radius: 8px;
+  overflow-y: auto !important; // Принудительно включаем прокрутку
   overscroll-behavior: contain;
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
+  z-index: 1;
 
   .image-gallery {
-    height: 100%;
-    
-    &-content {
-      height: 100%;
-      touch-action: pan-y;
-    }
-    
-    &-slide {
-      touch-action: pan-y;
+    pointer-events: none; // Отключаем события мыши/тача для всей галереи
+
+    &-slide,
+    &-thumbnails,
+    &-thumbnail {
+      pointer-events: auto; // Но включаем для элементов, которые должны быть кликабельны
     }
   }
 }
