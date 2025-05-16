@@ -326,3 +326,20 @@
     }
   }
 }
+.forceScroll {
+  touch-action: pan-y !important;
+  pointer-events: auto !important;
+
+  .image-gallery-slide-wrapper {
+    touch-action: pan-y !important;
+    overscroll-behavior: contain !important;
+  }
+
+  .image-gallery-slides {
+    touch-action: pan-y !important;
+  }
+
+  .image-gallery-content {
+    touch-action: pan-y !important;
+  }
+}
