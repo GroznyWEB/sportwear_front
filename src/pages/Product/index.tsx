@@ -87,11 +87,11 @@ const Product: React.FC = () => {
     );
   };
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: any) => {
     e.stopPropagation();
   };
   
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (e: any) => {
     e.stopPropagation();
   };
 
