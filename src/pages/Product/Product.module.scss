@@ -45,13 +45,12 @@
   z-index: 1;
 
   .image-gallery {
-    pointer-events: none; // Отключаем события мыши/тача для всей галереи
-
-    &-slide,
-    &-thumbnails,
-    &-thumbnail {
-      pointer-events: auto; // Но включаем для элементов, которые должны быть кликабельны
+    touch-action: none !important; // Полный запрет на touch-события
+    &-content, &-slide {
+      touch-action: none !important;
     }
+
+
   }
 }
 

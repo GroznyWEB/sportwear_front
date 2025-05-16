@@ -89,10 +89,14 @@ const Product: React.FC = () => {
 
   const handleTouchStart = (e: any) => {
     e.stopPropagation();
+    e.preventDefault(); // Блокируем стандартное поведение
+
   };
 
   const handleTouchMove = (e: any) => {
     e.stopPropagation();
+    e.preventDefault(); // Блокируем стандартное поведение
+
   };
 
   if (!product) {
@@ -119,7 +123,7 @@ const Product: React.FC = () => {
         <Col lg={6} className={styles.galleryCol}>
           <div className={styles.galleryWrapper}>
             {galleryImages.length > 0 ? (
-              <div style={{ height: "60vh", overflowY: "auto" }}>
+              <div style={{ height: "auto", overflowY: "auto" }}>
                 <ImageGallery
                   items={galleryImages}
                   showPlayButton={false}
