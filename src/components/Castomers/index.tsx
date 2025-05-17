@@ -43,25 +43,23 @@ const Castomers: React.FC = () => {
 
   return (
     <div className={styles.castomers}>
-      <h1>Покупателям</h1>
-      {data.map((item, index) => (
-        <div key={index} className={styles.item}>
-          <div className={styles.header} onClick={() => toggle(index)}>
-            <h3>{item.title}</h3>
-            {openIndex === index ? <IoCloseSharp  size={20} /> : <FaPlus size={20} />}
-          </div>
-          {openIndex === index && (
-            <div className={styles.content}>
-              <ul>
-                {item.content.map((line, i) => (
-                  <li key={i}>{line}</li>
-                ))}
-              </ul>
-            </div>
-          )}
+    <h1>Покупателям</h1>
+    {data.map((item, index) => (
+      <div key={index} className={styles.item}>
+        <div className={styles.header} onClick={() => toggle(index)}>
+          <h3>{item.title}</h3>
+          {openIndex === index ? <IoCloseSharp size={20} /> : <FaPlus size={20} />}
         </div>
-      ))}
-    </div>
+        <div className={`${styles.content} ${openIndex === index ? styles.open : ''}`}>
+          <ul>
+            {item.content.map((line, i) => (
+              <li key={i}>{line}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    ))}
+  </div>
   );
 };
 

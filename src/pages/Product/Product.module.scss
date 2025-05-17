@@ -36,14 +36,18 @@
   }
 }
 
+
 .galleryWrapper {
   border-radius: 8px;
   overflow: hidden;
+  
+
 
   .customGallery {
     .image-gallery-slide-wrapper {
       border-radius: 8px 8px 0 0;
     }
+
 
     .image-gallery-thumbnails-wrapper {
       border-radius: 0 0 8px 8px;

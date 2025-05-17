@@ -47,8 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           src={`${API_URL}/images/${product.images[0]}`}
           alt={product.name}
         />
-        <h4>{product.name}</h4>
-        <h4>{product.description}</h4>
+        <h4>{product.name} - {product.description}</h4>
         <h4>{product.brand}</h4>
         <p className={styles.price}>
           {product.price.toLocaleString("ru-RU")} ₽
