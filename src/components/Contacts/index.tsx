@@ -18,7 +18,7 @@ const Contacts: React.FC = () => {
             <FaPhone className={styles.icon} />
           </div>
           <h3 className={styles.cardTitle}>Связаться</h3>
-          <p className={styles.contactInfo}>+7 (964) 060-99-99</p>
+          <p className={styles.contactInfo}>+7 (909) 688-39-00</p>
           <p className={styles.contactInfo}>
             <FaEnvelope className={styles.smallIcon} /> Qatarhab@mail.ru
           </p>

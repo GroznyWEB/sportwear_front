@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
         <div className={styles.socialIcons}>
           <div className={styles.whatsApp}>
             <a
-              href="https://wa.me/79640609999?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
+              href="https://wa.me/79096883900?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
               target="_blank"
               rel="noopener noreferrer"
             >

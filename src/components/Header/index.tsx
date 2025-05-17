@@ -73,7 +73,7 @@ const Header = () => {
             <>
               <div className={styles.media}>
                 <a
-                  href="https://wa.me/79640609999?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
+                  href="https://wa.me/79096883900?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -153,7 +153,7 @@ const Header = () => {
             <div className={styles.mobileContacts}>
               <h5 className={styles.contactsTitle}>Свяжитесь с нами</h5>
               <a
-                href="https://wa.me/79640609999?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
+                href="https://wa.me/79096883900?text=Здравствуйте,%20хочу%20уточнить%20информацию%20по%20товару"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${styles.contactLink} ${styles.whatsapp}`}
